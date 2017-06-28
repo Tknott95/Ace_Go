@@ -1,2 +1,4 @@
-# Master Backend For Frontend Applications all in Golang - ## Trevor Knott
-#### GOLANG
+# Master Backend For Frontend Applications
+
+## Trevor Knott
+#### GOLANG | Algo's | Shell | SQL | Markup | JS | HTML5 | CSS3
