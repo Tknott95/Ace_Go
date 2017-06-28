@@ -20,7 +20,7 @@ func InitServer() {
 }
 
 func index(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
-	fmt.Println("Index Page Hit...")
+	fmt.Println("📝 Currently on Index page.")
 
 	tmpl.ExecuteTemplate(w, "index.gohtml", nil)
 }
