@@ -3,7 +3,7 @@ package main
 import (
 	globals "github.com/tknott95/Inspired/Globals"
 	srvCtrl "github.com/tknott95/MasterGo/Controllers"
-	mydb "github.com/tknott95/MasterGo/Controllers/DB_Ctrl"
+	mydb "github.com/tknott95/MasterGo/Controllers/DbCtrl"
 )
 
 func main() {
