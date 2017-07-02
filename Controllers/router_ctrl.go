@@ -15,8 +15,9 @@ func InitServer() {
 	mux := httprouter.New()
 
 	mux.GET("/", index)
-	mux.GET("/pc_langs", langAdd)
-	mux.POST("/pc_langs/delete/:lang_id", mydb.LangDelete)
+	mux.GET("/pc_langs", langFetch)
+	mux.POST("/pc_langs/delete/:lang_id", mydb.LangDelete) /* Calls both via. url not form val */
+	mux.POST("/pc_langs/add/:lang_id", mydb.LangAdd)       /* will use formval in blog portion for sure tho */
 
 	http.ListenAndServe(globals.PortNumber, mux)
 }
@@ -27,7 +28,7 @@ func index(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	tmpl.ExecuteTemplate(w, "index.gohtml", nil)
 }
 
-func langAdd(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
+func langFetch(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	println("📝 Currently on Language Control page.")
 
 	tmpl.ExecuteTemplate(w, "langs_fetch.gohtml", mydb.FetchLangs())

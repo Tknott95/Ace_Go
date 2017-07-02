@@ -3,7 +3,9 @@
   a:hover {
     cursor: pointer;
     size: +20%;
+    opacity: 0.5;
   }
+
 </style>
 
 <h1>TK | Lang Fetch</h1>
@@ -37,6 +39,22 @@
 
 {{ end }}
 </table>
+
+<br>
+<hr>
+<br>
+<md-card>
+  <form action="pc_langs/add/:lang_name" method="POST">
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="text" id="sample3">
+    <label class="mdl-textfield__label" for="sample3">Lang To Add</label>
+  </div>
+
+   <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+  <i class="material-icons">add</i>
+  </button>
+</form>
+</md-card>
 
 {{template "footer"}}
 <!-- Your content goes here --></div>
