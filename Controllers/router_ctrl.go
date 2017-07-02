@@ -14,10 +14,14 @@ var tmpl = template.Must(template.ParseGlob("./Views/*"))
 func InitServer() {
 	mux := httprouter.New()
 
+	// PC LANGS
 	mux.GET("/", index)
 	mux.GET("/pc_langs", langFetch)
 	mux.POST("/pc_langs/delete/:lang_id", mydb.LangDelete) /* Calls both via. url not form val */
 	mux.POST("/pc_langs/add", mydb.LangAdd)                /* will use formval in blog portion for sure tho */
+
+	// BLOG POSTS
+	// mux.GET("/blog_posts", mydb.BlogPostFetch)
 
 	/* UMBRELLA API PORTION */
 	/* Will use /api/ always! */

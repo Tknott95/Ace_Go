@@ -103,3 +103,22 @@ func ApiLangFetch(w http.ResponseWriter, req *http.Request, _ httprouter.Params)
 
 	w.Write(jsonData)
 }
+
+func BlogPostFetch() []*dbModels.BlogPost {
+	rows, err := store.DB.Query("SELECT * FROM blog_posts;")
+	if err != nil {
+		return nil
+	}
+	defer rows.Close()
+
+	posts := []*dbModels.BlogPost{}
+	for rows.Next() {
+		var post dbModels.BlogPost
+		err = rows.Scan(&post.ID, &post.Category, &post.Content, &post.Date)
+		if err != nil {
+			return nil
+		}
+		posts = append(posts, &post)
+	}
+	return posts
+}

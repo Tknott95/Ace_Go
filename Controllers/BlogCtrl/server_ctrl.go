@@ -1,0 +1,5 @@
+// package blogCtrl
+
+// func BlogPostFetch() {
+
+// }

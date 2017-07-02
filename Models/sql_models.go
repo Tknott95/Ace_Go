@@ -10,3 +10,10 @@ type Lang struct {
 	ID       int
 	LangName string
 }
+
+type BlogPost struct {
+	ID       int
+	Category string
+	Content  string
+	Date     int
+}
