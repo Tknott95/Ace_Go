@@ -2,6 +2,7 @@ package mydb
 
 import (
 	"database/sql"
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -92,4 +93,13 @@ func LangAdd(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	}
 
 	http.Redirect(w, req, "/pc_langs", 301)
+}
+
+func ApiLangFetch(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
+	jsonData, err := json.Marshal(FetchLangs())
+	if err != nil {
+		fmt.Println("error: ", err)
+	}
+
+	w.Write(jsonData)
 }

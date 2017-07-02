@@ -19,6 +19,10 @@ func InitServer() {
 	mux.POST("/pc_langs/delete/:lang_id", mydb.LangDelete) /* Calls both via. url not form val */
 	mux.POST("/pc_langs/add", mydb.LangAdd)                /* will use formval in blog portion for sure tho */
 
+	/* UMBRELLA API PORTION */
+	/* Will use /api/ always! */
+	mux.GET("/api/pc_langs", mydb.ApiLangFetch)
+
 	http.ListenAndServe(globals.PortNumber, mux)
 }
 
