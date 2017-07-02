@@ -2,6 +2,16 @@
 
 <h1>TK | Lang Fetch</h1>
 
+ {{range $element := .}}
+       <li>
+         <a>
+           {{$element}}
+         </a>
+          <form action="/pc_langs/delete/{{$element}}" method="post">
+            <button type="submit" value="{{$element}}">Delete {{$element}} </button>
+      </form>
+       </li>
+       {{end}}
 
 {{template "footer"}}
 <!-- Your content goes here --></div>

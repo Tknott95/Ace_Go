@@ -29,21 +29,21 @@ func newDB() *SQLStore {
 	}
 }
 
-func FetchLangs() ([]*Lang, error) {
-	rows, err := store.DB.Query("SELECT * FROM pc_langs;")
+func FetchLangs() []*Lang {
+	rows, err := store.DB.Query("SELECT lang_name FROM pc_langs;")
 	if err != nil {
-		return nil, err
+		return nil
 	}
 	defer rows.Close()
 
 	langs := []*Lang{}
 	for rows.Next() {
 		var l Lang
-		err = rows.Scan(&l.ID, &l.LangName)
+		err = rows.Scan( /* &l.ID, */ &l.LangName)
 		if err != nil {
-			return nil, err
+			return nil
 		}
 		langs = append(langs, &l)
 	}
-	return langs, nil
+	return langs
 }
