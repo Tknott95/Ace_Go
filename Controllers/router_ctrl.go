@@ -1,7 +1,6 @@
 package srvCtrl
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 
@@ -17,26 +16,19 @@ func InitServer() {
 
 	mux.GET("/", index)
 	mux.GET("/pc_langs", langAdd)
-	mux.POST("/pc_langs/delete/:lang_id", langDelete)
+	mux.POST("/pc_langs/delete/:lang_id", mydb.LangDelete)
 
 	http.ListenAndServe(globals.PortNumber, mux)
 }
 
 func index(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
-	fmt.Println("📝 Currently on Index page.")
+	println("📝 Currently on Index page.")
 
 	tmpl.ExecuteTemplate(w, "index.gohtml", nil)
 }
 
 func langAdd(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
-	fmt.Println("📝 Currently on Language Control page.")
+	println("📝 Currently on Language Control page.")
 
 	tmpl.ExecuteTemplate(w, "langs_fetch.gohtml", mydb.FetchLangs())
-}
-
-func langDelete(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
-	var lang_to_del string
-	lang_to_del = ps.ByName("lang_id")
-	println("Wanting to delete: ", lang_to_del)
-	http.Redirect(w, req, "/pc_langs", 301)
 }
