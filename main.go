@@ -3,7 +3,6 @@ package main
 import (
 	globals "github.com/tknott95/Inspired/Globals"
 	srvCtrl "github.com/tknott95/MasterGo/Controllers"
-	mydb "github.com/tknott95/MasterGo/Controllers/DbCtrl"
 )
 
 func main() {
@@ -12,9 +11,6 @@ func main() {
 
 	/* On Port ? */
 	println("\n🚀 Server Running on Port: " + globals.PortNumber + "\n")
-
-	/* Est a mySql Connection before serving pages */
-	mydb.SQLConnection()
 
 	/* Begin Server w/ Routes */
 	srvCtrl.InitServer()

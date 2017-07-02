@@ -3,6 +3,8 @@ package mydb
 import (
 	"database/sql"
 	"fmt"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 var store = newDB()
@@ -16,10 +18,6 @@ type Lang struct {
 	LangName string
 }
 
-func SQLConnection() {
-	newDB()
-}
-
 func newDB() *SQLStore {
 	db, err := sql.Open("mysql", "tknott95:Welcome1!@tcp(admininstance.cfchdss74ohb.us-west-1.rds.amazonaws.com:3306)/adminaws?charset=utf8")
 	if err != nil {
@@ -31,8 +29,8 @@ func newDB() *SQLStore {
 	}
 }
 
-func fetchLangs() ([]*Lang, error) {
-	rows, err := store.DB.Query("SELECT * FROM pages")
+func FetchLangs() ([]*Lang, error) {
+	rows, err := store.DB.Query("SELECT * FROM pc_langs;")
 	if err != nil {
 		return nil, err
 	}

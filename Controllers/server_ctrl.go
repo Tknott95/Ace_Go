@@ -15,6 +15,7 @@ func InitServer() {
 	mux := httprouter.New()
 
 	mux.GET("/", index)
+	mux.GET("/1", lang_control)
 
 	http.ListenAndServe(globals.PortNumber, mux)
 }
@@ -23,4 +24,10 @@ func index(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	fmt.Println("📝 Currently on Index page.")
 
 	tmpl.ExecuteTemplate(w, "index.gohtml", nil)
+}
+
+func lang_control(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
+	fmt.Println("📝 Currently on Language Control page.")
+
+	tmpl.ExecuteTemplate(w, "langs_fetch.gohtml", nil)
 }
