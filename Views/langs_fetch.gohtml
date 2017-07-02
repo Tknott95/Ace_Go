@@ -1,31 +1,48 @@
 {{template "header"}}
+<style>
+  a:hover {
+    cursor: pointer;
+    size: +20%;
+  }
+</style>
 
 <h1>TK | Lang Fetch</h1>
 
- {{range $index, $element := .}}
-      
+   <table class="mdl-data-table mdl-js-data-table  mdl-shadow--2dp">
+  <thead>
+    <tr>
+      <th class="mdl-data-table__cell--non-numeric">Pc Langs</th>
+      <th>ID</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+{{ range . }}
 
-       <ul class="demo-list-icon mdl-list">
-   <li>
-         <a>
-           {{$index}} - {{$element}}
-         </a>
+  <tbody>
+    <tr>
+      <td class="mdl-data-table__cell--non-numeric">{{ .LangName }}</td>
 
-          <form action="/pc_langs/delete/{{$element}}" method="post">
-            <button type="submit" value="{{$element}}">Delete {{$element}} </button>
+      <td>{{ .ID }}</td>
+
+      <td>
+      <form action="pc_langs/delete/{{.LangName}}" method="POST">
+      <a onclick="this.parentNode.submit()">
+      <i class="material-icons">delete</i>
+      </a>
       </form>
-       </li>
-</ul>
-       {{end}}
+      <td>
 
-   {{ range . }}
+    </tr>
+  </tbody>
 
-   
-    {{ .ID }}
-   {{ end }}
+{{ end }}
+</table>
+
 {{template "footer"}}
 <!-- Your content goes here --></div>
     </div>
   </main>
 </div>
+
+
 
