@@ -2,10 +2,10 @@
 
 <h1>TK | Lang Fetch</h1>
 
- {{range $element := .}}
+ {{range $index, $element := .}}
        <li>
          <a>
-           {{$element}}
+           {{$index}} - {{$element}}
          </a>
           <form action="/pc_langs/delete/{{$element}}" method="post">
             <button type="submit" value="{{$element}}">Delete {{$element}} </button>
