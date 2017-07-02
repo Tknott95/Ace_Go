@@ -21,11 +21,12 @@ func InitServer() {
 	mux.POST("/pc_langs/add", mydb.LangAdd)                /* will use formval in blog portion for sure tho */
 
 	// BLOG POSTS
-	// mux.GET("/blog_posts", mydb.BlogPostFetch)
+	mux.GET("/blog_posts", blogFetch)
 
 	/* UMBRELLA API PORTION */
 	/* Will use /api/ always! */
 	mux.GET("/api/pc_langs", mydb.ApiLangFetch)
+	mux.GET("/api/blog_posts", mydb.ApiBlogFetch)
 
 	http.ListenAndServe(globals.PortNumber, mux)
 }
@@ -40,4 +41,10 @@ func langFetch(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	println("📝 Currently on Language Control page.")
 
 	tmpl.ExecuteTemplate(w, "langs_fetch.gohtml", mydb.FetchLangs())
+}
+
+func blogFetch(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
+	println("📝 Currently on Blog Post Control page.")
+
+	tmpl.ExecuteTemplate(w, "blog_control.gohtml", mydb.BlogPostFetch())
 }

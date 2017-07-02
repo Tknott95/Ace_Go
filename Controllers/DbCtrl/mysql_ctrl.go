@@ -107,7 +107,7 @@ func ApiLangFetch(w http.ResponseWriter, req *http.Request, _ httprouter.Params)
 func BlogPostFetch() []*dbModels.BlogPost {
 	rows, err := store.DB.Query("SELECT * FROM blog_posts;")
 	if err != nil {
-		return nil
+		println("eRROR:", err)
 	}
 	defer rows.Close()
 
@@ -116,9 +116,18 @@ func BlogPostFetch() []*dbModels.BlogPost {
 		var post dbModels.BlogPost
 		err = rows.Scan(&post.ID, &post.Category, &post.Content, &post.Date)
 		if err != nil {
-			return nil
+			println("eRROR:", err)
 		}
 		posts = append(posts, &post)
 	}
 	return posts
+}
+
+func ApiBlogFetch(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
+	jsonData, err := json.Marshal(BlogPostFetch())
+	if err != nil {
+		fmt.Println("error: ", err)
+	}
+
+	w.Write(jsonData)
 }
