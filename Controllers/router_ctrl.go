@@ -17,7 +17,7 @@ func InitServer() {
 
 	mux.GET("/", index)
 	mux.GET("/pc_langs", langAdd)
-	mux.POST("/pc_langs/delete/:id", langDelete)
+	mux.POST("/pc_langs/delete/:pc_lang", langDelete)
 
 	http.ListenAndServe(globals.PortNumber, mux)
 }
@@ -35,6 +35,8 @@ func langAdd(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 }
 
 func langDelete(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
-	println("Wanting to delete: ", ps)
+	var lang_to_del string
+	lang_to_del = ps.ByName("pc_lang")
+	println("Wanting to delete: ", lang_to_del)
 	http.Redirect(w, req, "/pc_langs", 301)
 }
