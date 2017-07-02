@@ -69,9 +69,9 @@ func LangDelete(w http.ResponseWriter, req *http.Request, ps httprouter.Params) 
 	http.Redirect(w, req, "/pc_langs", 301)
 }
 
-func LangAdd(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+func LangAdd(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	var lang_to_add string
-	lang_to_add = ps.ByName("lang_name")
+	lang_to_add = req.FormValue("lang_add")
 
 	println("Lang to add:", lang_to_add)
 

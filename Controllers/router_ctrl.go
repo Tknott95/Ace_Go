@@ -17,7 +17,7 @@ func InitServer() {
 	mux.GET("/", index)
 	mux.GET("/pc_langs", langFetch)
 	mux.POST("/pc_langs/delete/:lang_id", mydb.LangDelete) /* Calls both via. url not form val */
-	mux.POST("/pc_langs/add/:lang_id", mydb.LangAdd)       /* will use formval in blog portion for sure tho */
+	mux.POST("/pc_langs/add", mydb.LangAdd)                /* will use formval in blog portion for sure tho */
 
 	http.ListenAndServe(globals.PortNumber, mux)
 }

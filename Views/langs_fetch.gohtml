@@ -6,6 +6,10 @@
     opacity: 0.5;
   }
 
+  .json-btn:hover {
+    opacity: 0.7;
+  }
+
 </style>
 
 <h1>TK | Lang Fetch</h1>
@@ -44,16 +48,20 @@
 <hr>
 <br>
 <md-card>
-  <form action="pc_langs/add/:lang_name" method="POST">
+  <form action="pc_langs/add" method="POST">
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <input class="mdl-textfield__input" type="text" id="sample3">
-    <label class="mdl-textfield__label" for="sample3">Lang To Add</label>
+    <input class="mdl-textfield__input" name="lang_add" type="text" id="lang_add">
+    <label class="mdl-textfield__label" for="lang_add">Lang To Add</label>
   </div>
 
-   <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+   <button value="lang_add" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
   <i class="material-icons">add</i>
   </button>
 </form>
+
+<button class="json-btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+  JSON VIEW OF LANGUAGES
+</button>
 </md-card>
 
 {{template "footer"}}
