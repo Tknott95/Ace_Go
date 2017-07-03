@@ -26,8 +26,11 @@
   <thead>
     <tr class="tr-tk">
       <th class="mdl-data-table__cell--non-numeric">Blog Posts</th>
+      <th>Title</th>
+      <th>Image</th>
       <th>Category</th>
       <th>Content</th>
+      <th>Author</th>
       <th>Date</th>
     </tr>
   </thead>
@@ -56,10 +59,17 @@
     <tr>
       <td class="mdl-data-table__cell--non-numeric">{{ .ID }}</td>
 
+            <td class="mdl-data-table__cell--non-numeric">{{ .Title }}</td>
+
+      <td class="mdl-data-table__cell--non-numeric">{{ .Image }}</td>
+
+
       <td class="mdl-data-table__cell--non-numeric">{{ .Category }}</td>
 
 
             <td class="mdl-data-table__cell--non-numeric">{{ .Content }} </td>
+
+            <td>{{ .Author }}</td>
 
             <td>{{ .Date }}</td>
 

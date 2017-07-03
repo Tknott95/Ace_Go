@@ -105,7 +105,7 @@ func ApiLangFetch(w http.ResponseWriter, req *http.Request, _ httprouter.Params)
 }
 
 func BlogPostFetch() []*dbModels.BlogPost {
-	rows, err := store.DB.Query("SELECT * FROM blog_posts;")
+	rows, err := store.DB.Query("SELECT * FROM blog_ctrl;")
 	if err != nil {
 		println("eRROR:", err)
 	}
@@ -114,7 +114,7 @@ func BlogPostFetch() []*dbModels.BlogPost {
 	posts := []*dbModels.BlogPost{}
 	for rows.Next() {
 		var post dbModels.BlogPost
-		err = rows.Scan(&post.ID, &post.Category, &post.Content, &post.Date)
+		err = rows.Scan(&post.ID, &post.Title, &post.Image, &post.Category, &post.Content, &post.Author, &post.Date)
 		if err != nil {
 			println("eRROR:", err)
 		}
