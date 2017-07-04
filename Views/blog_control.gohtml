@@ -116,42 +116,42 @@
 				<h2 class="mdl-card__title-text">Add Blog Post</h2>
 			</div>
 	  	<div class="mdl-card__supporting-text">
-				<form action="#">
-
+				<form action="/blog_posts/add" method="POST">
           
           <div class="mdl-textfield mdl-js-textfield">
-						<input class="mdl-textfield__input" type="text" id="blog_title" />
+						<input class="mdl-textfield__input" minlength="2" id="blog_title" type="text" name="blog_title" />
 						<label class="mdl-textfield__label" for="blog_title">Blog Title</label>
 					</div>
 
           <div class="mdl-textfield mdl-js-textfield">
-						<input class="mdl-textfield__input" type="text" id="blog_image" />
+						<input class="mdl-textfield__input" minlength="2" type="text" name="blog_image" />
 						<label class="mdl-textfield__label" for="blog_image">Blog Header Image</label>
 					</div>
 
           <div class="mdl-textfield mdl-js-textfield">
-						<input class="mdl-textfield__input" disabled value="Trevor Knott" type="text" id="author" />
-						<label class="mdl-textfield__label" disabled value="Trevor Knott" for="authoor">Blog Author</label>
+						<input class="mdl-textfield__input" disabled name="Trevor Knott" type="text" id="author" />
+						<label class="mdl-textfield__label" disabled value="Trevor Knott" for="authoor">Trevor Knott</label>
 					</div>
 
 					<div class="mdl-textfield mdl-js-textfield">
-						<input class="mdl-textfield__input" type="text" id="blog_category" />
+						<input class="mdl-textfield__input" type="text" minlength="2" name="blog_category" />
 						<label class="mdl-textfield__label" for="blog_category">Blog Category</label>
 					</div>
 
 					<div class="mdl-textfield mdl-js-textfield">
-						<textarea class="mdl-textfield__input" type="textarea" rows="4" name="blog_content" id="blog_content" ></textarea>
+						<textarea class="mdl-textfield__input" type="textarea" minlength="20" rows="4" name="blog_content"></textarea>
 						<label class="mdl-textfield__label" for="blog_content">Blog Content</label>
 					</div>
 
           <div class="mdl-textfield mdl-js-textfield">
             <p>Add funciton to submit date in go code</p>
 					</div>
-				</form>
-			</div>
-			<div class="mdl-card__actions mdl-card--border">
+          <div class="mdl-card__actions mdl-card--border">
 				<button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Add Blog Post</button>
 			</div>
+				</form>
+			</div>
+			
 		</div>
 	</main>
 </div>
