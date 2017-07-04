@@ -1,11 +1,16 @@
 package mydb
 
 import (
+	"crypto/sha1"
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
+	"os"
+	"path/filepath"
+	"strings"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/julienschmidt/httprouter"
@@ -136,14 +141,42 @@ func ApiBlogFetch(w http.ResponseWriter, req *http.Request, _ httprouter.Params)
 func BlogPostAdd(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 
 	var blogTitle string
-	var blogImage string  /* String 4 testing run 1 */
+	// var blogImage string  /* String 4 testing run 1 */
 	var blogAuthor string /* Always Defaults to Trevor Knott on admin */
 	var blogCategory string
 	var blogContent string
 	// var blogDate string @TODO Needs to be time.Now() go way
 
 	blogTitle = req.FormValue("blog_title")
-	blogImage = req.FormValue("blog_image")
+	blogImage, header, err := req.FormFile("blog_image")
+	if err != nil {
+		panic(err)
+	}
+
+	defer blogImage.Close()
+
+	ext := strings.Split(header.Filename, ".")[1]
+	h := sha1.New()
+	io.Copy(h, blogImage)
+	fname := fmt.Sprintf("%x", h.Sum(nil)) + "." + ext
+
+	// create new file
+	wd, err := os.Getwd()
+	if err != nil {
+		fmt.Println(err)
+	}
+	path := filepath.Join(wd, "public", "pics", fname)
+	nf, err := os.Create(path)
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer nf.Close()
+	// copy
+	blogImage.Seek(0, 0)
+	io.Copy(nf, blogImage)
+
+	println("File name:", fname)
+
 	blogAuthor = "Trevor Knott"
 	blogCategory = req.FormValue("blog_category")
 	blogContent = req.FormValue("blog_content")
@@ -160,7 +193,7 @@ func BlogPostAdd(w http.ResponseWriter, req *http.Request, _ httprouter.Params) 
 		println("Unable to insert language into mysql db.")
 	}
 
-	result, err := dbInsert.Exec(0, blogTitle, blogImage, blogCategory, blogContent, blogAuthor)
+	result, err := dbInsert.Exec(0, blogTitle, fname, blogCategory, blogContent, blogAuthor)
 	if err != nil {
 		println("Error adding sql lang")
 	}
@@ -173,4 +206,5 @@ func BlogPostAdd(w http.ResponseWriter, req *http.Request, _ httprouter.Params) 
 	println("Post Category :", blogCategory, "\n")
 	println("Post Content :", blogContent, "\n")
 
+	http.Redirect(w, req, "/pc_langs", 301)
 }
