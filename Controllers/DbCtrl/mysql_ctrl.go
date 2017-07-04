@@ -165,7 +165,7 @@ func BlogPostAdd(w http.ResponseWriter, req *http.Request, _ httprouter.Params) 
 	if err != nil {
 		fmt.Println(err)
 	}
-	path := filepath.Join(wd, "public", "pics", fname)
+	path := filepath.Join(wd, "Public", "pics", fname)
 	nf, err := os.Create(path)
 	if err != nil {
 		fmt.Println(err)
@@ -206,7 +206,7 @@ func BlogPostAdd(w http.ResponseWriter, req *http.Request, _ httprouter.Params) 
 	println("Post Category :", blogCategory, "\n")
 	println("Post Content :", blogContent, "\n")
 
-	http.Redirect(w, req, "/pc_langs", 301)
+	http.Redirect(w, req, "/blog_posts", 301)
 }
 
 func BlogPostDel(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
