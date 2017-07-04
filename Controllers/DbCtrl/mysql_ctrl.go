@@ -208,3 +208,29 @@ func BlogPostAdd(w http.ResponseWriter, req *http.Request, _ httprouter.Params) 
 
 	http.Redirect(w, req, "/pc_langs", 301)
 }
+
+func BlogPostDel(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	var post_to_del string
+	post_to_del = ps.ByName("post_id")
+
+	println("Blog Post to delete via id:", post_to_del)
+
+	stmt, err := store.DB.Prepare(`DELETE FROM blog_ctrl WHERE blog_id= ?;`)
+	defer stmt.Close()
+
+	rows, err := stmt.Query(post_to_del)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+	for rows.Next() {
+		// ...
+	}
+	if err = rows.Err(); err != nil {
+		log.Fatal(err)
+	}
+
+	println(w, "DELETED BLOG POST BY ID:", post_to_del)
+
+	http.Redirect(w, req, "/blog_posts", 301)
+}

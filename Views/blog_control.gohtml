@@ -36,12 +36,12 @@
   <thead>
     <tr class="tr-tk">
       <th class="mdl-data-table__cell--non-numeric">Blog Posts</th>
-      <th>Title</th>
-      <th>Image</th>
-      <th>Category</th>
-      <th>Content</th>
-      <th>Author</th>
-      <th>Date</th>
+      <th class="mdl-data-table__cell--non-numeric">Title</th>
+      <th class="mdl-data-table__cell--non-numeric">Image</th>
+      <th class="mdl-data-table__cell--non-numeric">Category</th>
+      <th class="mdl-data-table__cell--non-numeric">Content</th>
+      <th class="mdl-data-table__cell--non-numeric">Author</th>
+      <th class="mdl-data-table__cell--non-numeric">Date</th>
     </tr>
   </thead>
 {{ range . }}
@@ -60,9 +60,14 @@
   <div class="mdl-card__actions mdl-card--border">
     <a href="/api/blog_posts" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">JSON View of Posts</a>
     <div class="mdl-layout-spacer"></div>
-    <button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">favorite</i></button>
-    <button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">share</i></button>
-    <a href="/blog_posts/delete/{{.ID}}" class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">delete</i></a>
+    <!--button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">favorite</i></button>
+    <button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">share</i></button -->
+    
+    <form id="myform" method="post" action="/blog_posts/delete/{{.ID}}">
+  <input type="hidden" name="name" value="value" /> 
+  <a class="mdl-button mdl-button--icon mdl-button--colored" onclick="document.getElementById('myform').submit();"><i class="material-icons">delete</i></a>
+</form>
+
 
     <p> {{ .Date }}</p>
   </div>

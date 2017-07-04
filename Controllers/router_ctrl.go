@@ -23,6 +23,7 @@ func InitServer() {
 	// BLOG POSTS
 	mux.GET("/blog_posts", blogFetch)
 	mux.POST("/blog_posts/add", mydb.BlogPostAdd)
+	mux.POST("/blog_posts/delete/:post_id", mydb.BlogPostDel)
 
 	/* UMBRELLA API PORTION */
 	/* Will use /api/ always! */
