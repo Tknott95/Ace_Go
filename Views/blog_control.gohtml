@@ -58,7 +58,7 @@
     <p>{{ .Content }} </p>
   </div>
   <div class="mdl-card__actions mdl-card--border">
-    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Read More</a>
+    <a href="/api/blog_posts" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">JSON View of Posts</a>
     <div class="mdl-layout-spacer"></div>
     <button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">favorite</i></button>
     <button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">share</i></button>
@@ -97,17 +97,7 @@
 <hr>
 <br>
 <md-card>
-  <form action="pc_langs/add" method="POST">
-  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <input class="mdl-textfield__input" name="lang_add" type="text" id="lang_add">
-    <label class="mdl-textfield__label" for="lang_add">Lang To Add</label>
-  </div>
-
-   <button value="lang_add" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
-  <i class="material-icons">add</i>
-  </button>
-</form>
-
+  
 
 <div class="mdl-layout mdl-js-layout mdl-color--grey-100" style="width: 700px;">
 	<main class="mdl-layout__content" style="width: 700px;">
@@ -124,8 +114,7 @@
 					</div>
 
           <div class="mdl-textfield mdl-js-textfield">
-						<input class="mdl-textfield__input" minlength="2" type="text" name="blog_image" />
-						<label class="mdl-textfield__label" for="blog_image">Blog Header Image</label>
+						<input class="mdl-textfield__input" type="file" name="blog_image" />
 					</div>
 
           <div class="mdl-textfield mdl-js-textfield">
