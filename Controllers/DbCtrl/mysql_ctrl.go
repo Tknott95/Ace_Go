@@ -82,6 +82,7 @@ func LangAdd(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	}
 
 	if lang_to_add != "" {
+		/* Adding Record */
 		result, err := stmt.Exec(0, lang_to_add)
 		if err != nil {
 			println("Error adding sql lang")
@@ -153,4 +154,23 @@ func BlogPostAdd(w http.ResponseWriter, req *http.Request, _ httprouter.Params) 
 	println("Post Author :", blogAuthor, "\n")
 	println("Post Category :", blogCategory, "\n")
 	println("Post Content :", blogContent, "\n")
+
+	dbInsert, err := store.DB.Prepare(`INSERT INTO blog_ctrl(blog_id, blog_title, blog_image, blog_category, blog_content, blog_author) VALUES(?, ?, ?, ?, ?, ?);`) // `INSERT INTO customer VALUES ("James");`
+	if err != nil {
+		println("Unable to insert language into mysql db.")
+	}
+
+	result, err := dbInsert.Exec(0, blogTitle, blogImage, blogCategory, blogContent, blogAuthor)
+	if err != nil {
+		println("Error adding sql lang")
+	}
+
+	fmt.Println(w, "ADD RECORD By NAME:", blogTitle, "RESULT:", result)
+
+	println("Post Title :", blogTitle, "\n")
+	println("Post Image Name :", blogImage, "\n")
+	println("Post Author :", blogAuthor, "\n")
+	println("Post Category :", blogCategory, "\n")
+	println("Post Content :", blogContent, "\n")
+
 }
