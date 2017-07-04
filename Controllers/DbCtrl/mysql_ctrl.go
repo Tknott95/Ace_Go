@@ -131,3 +131,26 @@ func ApiBlogFetch(w http.ResponseWriter, req *http.Request, _ httprouter.Params)
 
 	w.Write(jsonData)
 }
+
+func BlogPostAdd(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
+
+	var blogTitle string
+	var blogImage string  /* String 4 testing run 1 */
+	var blogAuthor string /* Always Defaults to Trevor Knott on admin */
+	var blogCategory string
+	var blogContent string
+	// var blogDate string @TODO Needs to be time.Now() go way
+
+	blogTitle = req.FormValue("blog_title")
+	blogImage = req.FormValue("blog_image")
+	blogAuthor = "Trevor Knott"
+	blogCategory = req.FormValue("blog_category")
+	blogContent = req.FormValue("blog_content")
+
+	println("\n<> BLOG POST TO ADD <>\n")
+	println("Post Title :", blogTitle, "\n")
+	println("Post Image Name :", blogImage, "\n")
+	println("Post Author :", blogAuthor, "\n")
+	println("Post Category :", blogCategory, "\n")
+	println("Post Content :", blogContent, "\n")
+}
