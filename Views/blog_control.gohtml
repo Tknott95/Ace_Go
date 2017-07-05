@@ -67,6 +67,12 @@
   <input type="hidden" name="name" value="value" /> 
   <a class="mdl-button mdl-button--icon mdl-button--colored" onclick="document.getElementById('myform').submit();"><i class="material-icons">delete</i></a>
 </form>
+
+<form id="imageForm" method="get" action="/Public/pics/{{.Image}}">
+  <input type="hidden" name="name" value="value" /> 
+  <a class="mdl-button mdl-button--icon mdl-button--colored" onclick="document.getElementById('imageForm').submit();"><i class="material-icons">search</i></a>
+</form>
+
   </div>
 </div>
 </div>
@@ -136,6 +142,7 @@
 						<label class="mdl-textfield__label" for="blog_content">Blog Content</label>
 					</div>
 
+
           <div class="mdl-textfield mdl-js-textfield">
             <p>Add funciton to submit date in go code</p>
 					</div>
@@ -150,9 +157,6 @@
 </div>
 
 
-<a href="/api/blog_posts"><button class="json-btn mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-  JSON VIEW OF BLOG POSTS
-</button>
 </a>
 </md-card>
 
