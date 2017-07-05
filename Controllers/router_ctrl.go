@@ -30,7 +30,14 @@ func InitServer() {
 	mux.GET("/api/pc_langs", mydb.ApiLangFetch)
 	mux.GET("/api/blog_posts", mydb.ApiBlogFetch)
 
+	//http.Handle("/Public/", http.StripPrefix("/Public", http.FileServer(http.Dir("./Public"))))
+
+	mux.NotFound = http.StripPrefix("/Public", http.FileServer(http.Dir("./Public")))
+
+	// handler for serving files
+	// mux.ServeFiles("/Public/*filepath", http.Dir("/var/www/Public/"))
 	http.ListenAndServe(globals.PortNumber, mux)
+
 }
 
 func index(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
