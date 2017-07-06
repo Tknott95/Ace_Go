@@ -13,23 +13,21 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 	mydb "github.com/tknott95/MasterGo/Controllers/DbCtrl"
-	dbModels "github.com/tknott95/MasterGo/Models"
+	Models "github.com/tknott95/MasterGo/Models"
 )
 
-func BlogPostFetch() []*dbModels.BlogPost {
+func BlogPostFetch() []*Models.BlogPost {
 	rows, err := mydb.Store.DB.Query("SELECT * FROM blog_ctrl;")
 	if err != nil {
 		println("eRROR:", err)
 	}
 	defer rows.Close()
 
-	posts := []*dbModels.BlogPost{}
+	posts := []*Models.BlogPost{}
 	for rows.Next() {
-		var post dbModels.BlogPost
+		var post Models.BlogPost
 		err = rows.Scan(&post.ID, &post.Title, &post.Image, &post.Category, &post.Content, &post.Author, &post.Date)
-		// if err != nil {
-		// 	println("eRROR:", err)
-		// }
+
 		posts = append(posts, &post)
 	}
 	return posts
@@ -116,6 +114,7 @@ func BlogPostAdd(w http.ResponseWriter, req *http.Request, _ httprouter.Params) 
 }
 
 func BlogPostDel(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	// GET PICNAME VIA FORM VALUE THEN REMOVE PIC FILE ON DELETE. USE same func as Adding Pics @TODO
 	var post_to_del string
 	post_to_del = ps.ByName("post_id")
 

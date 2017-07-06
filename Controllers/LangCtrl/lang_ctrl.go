@@ -8,19 +8,19 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 	mydb "github.com/tknott95/MasterGo/Controllers/DbCtrl"
-	dbModels "github.com/tknott95/MasterGo/Models"
+	Models "github.com/tknott95/MasterGo/Models"
 )
 
-func FetchLangs() []*dbModels.Lang {
+func FetchLangs() []*Models.Lang {
 	rows, err := mydb.Store.DB.Query("SELECT * FROM pc_langs;")
 	if err != nil {
 		return nil
 	}
 	defer rows.Close()
 
-	langs := []*dbModels.Lang{}
+	langs := []*Models.Lang{}
 	for rows.Next() {
-		var l dbModels.Lang
+		var l Models.Lang
 		err = rows.Scan(&l.ID, &l.LangName)
 		if err != nil {
 			return nil
