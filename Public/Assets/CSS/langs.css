@@ -1,0 +1,9 @@
+  a:hover {
+    cursor: pointer;
+    size: +20%;
+    opacity: 0.5;
+  }
+
+  .json-btn:hover,button:hover {
+    opacity: 0.7;
+  }

@@ -1,8 +1,11 @@
 
-h1 {
-  text-align: center;
-  display: block;
-  margin: auto;
+/*<div class="mdl-grid center-items">
+    <div class="mdl-cell mdl-cell--4-col">This div is centered</div>
+</div>*/
+
+/* Centers Content */
+.mdl-grid.center-items {
+  justify-content: center;
 }
 
 .lang-card-wide.mdl-card, .blog-card-wide.mdl-card {
