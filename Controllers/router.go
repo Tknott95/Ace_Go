@@ -47,6 +47,8 @@ func index(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	tmpl.ExecuteTemplate(w, "index.gohtml", nil)
 }
 
+/* Base Fetch ALL Query Pages Rendered Here  */
+
 func langFetch(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	println("📝 Currently on Language Control page.")
 
