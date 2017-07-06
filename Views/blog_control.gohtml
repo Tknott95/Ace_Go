@@ -46,7 +46,7 @@
   </thead>
 {{ range . }}
 
-<div >
+<div class="col-sm-12">
   <div class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--2dp col-sm-3">
   <figure class="mdl-card__media">
     <img src="/Public/pics/{{ .Image }}" repeat alt="" />
@@ -68,10 +68,9 @@
   <a class="mdl-button mdl-button--icon mdl-button--colored" onclick="document.getElementById('myform').submit();"><i class="material-icons">delete</i></a>
 </form>
 
-<form id="imageForm" method="get" action="/Public/pics/{{.Image}}">
-  <input type="hidden" name="name" value="value" /> 
-  <a class="mdl-button mdl-button--icon mdl-button--colored" onclick="document.getElementById('imageForm').submit();"><i class="material-icons">search</i></a>
-</form>
+
+  <a href="/Public/pics/{{.Image}}" class="mdl-button mdl-button--icon mdl-button--colored" ><i class="material-icons">search</i></a>
+
 
   </div>
 </div>
