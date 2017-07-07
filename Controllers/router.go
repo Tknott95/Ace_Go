@@ -7,6 +7,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 	blogCtrl "github.com/tknott95/MasterGo/Controllers/BlogCtrl"
 	langCtrl "github.com/tknott95/MasterGo/Controllers/LangCtrl"
+	twilioCtrl "github.com/tknott95/MasterGo/Controllers/TwilioCtrl"
 	globals "github.com/tknott95/MasterGo/Globals"
 )
 
@@ -14,6 +15,8 @@ var tmpl = template.Must(template.ParseGlob("./Views/*"))
 
 func InitServer() {
 	mux := httprouter.New()
+
+	twilioCtrl.TwilioTest()
 
 	// PC LANGS
 	mux.GET("/", index)
