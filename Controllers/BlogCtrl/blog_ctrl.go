@@ -118,6 +118,9 @@ func BlogPostDel(w http.ResponseWriter, req *http.Request, ps httprouter.Params)
 	var post_to_del string
 	post_to_del = ps.ByName("post_id")
 
+	var pic_to_rmv string
+	pic_to_rmv = ps.ByName("pic_rmv")
+
 	println("Blog Post to delete via id:", post_to_del)
 
 	stmt, err := mydb.Store.DB.Prepare(`DELETE FROM blog_ctrl WHERE blog_id= ?;`)
@@ -136,6 +139,8 @@ func BlogPostDel(w http.ResponseWriter, req *http.Request, ps httprouter.Params)
 	}
 
 	println(w, "DELETED BLOG POST BY ID:", post_to_del)
+
+	os.Remove("/home/tk/Workspace/Golang/src/github.com/tknott95/MasterGo/Public/pics/" + pic_to_rmv)
 
 	http.Redirect(w, req, "/blog_posts", 301)
 }

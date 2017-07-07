@@ -35,13 +35,11 @@
     <!--button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">favorite</i></button>
     <button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">share</i></button -->
     
-    <form id="myform" method="post" action="/blog_posts/delete/{{.ID}}">
-  <input type="hidden" name="name" value="value" /> 
-  <a class="mdl-button mdl-button--icon mdl-button--colored" onclick="document.getElementById('myform').submit();"><i class="material-icons">delete</i></a>
-</form>
-
-
   <a href="/Public/pics/{{.Image}}" class="mdl-button mdl-button--icon mdl-button--colored" ><i class="material-icons">search</i></a>
+
+<form>
+    <button type="submit" formmethod="post" formaction="/blog_posts/delete/{{.ID}}/{{.Image}}">Del <i class="material-icons">delete</i></button>
+</form>
 
 
   </div>

@@ -16,6 +16,10 @@ a:hover {
       max-height: 400px;
     }
 
+    .md-card {
+      height: 500px;
+    }
+
     .mdl-card {
       width: 350px;
     }
