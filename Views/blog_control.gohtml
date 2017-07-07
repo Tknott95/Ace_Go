@@ -2,7 +2,6 @@
 
 <link rel="stylesheet" href="/Public/Assets/CSS/blog.css">
 
-<h1>TK | Blog Post Control</h1>
 
 <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
   <thead>
@@ -16,38 +15,10 @@
       <th class="mdl-data-table__cell--non-numeric">Date</th>
     </tr>
   </thead>
+
 {{ range . }}
 
-<div class="col-sm-12">
-  <div class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--2dp col-sm-3">
-  <figure class="mdl-card__media">
-    <img src="/Public/pics/{{ .Image }}" repeat alt="" />
-  </figure>
-  <div class="mdl-card__title">
-    <h1 class="mdl-card__title-text">{{ .ID }} - {{ .Category }} - PN: {{ .Image }}</h1>
-  </div>
-  <div class="mdl-card__supporting-text">
-    <p>{{ .Content }} </p>
-  </div>
-  <div class="mdl-card__actions mdl-card--border">
-    <a href="/api/blog_posts" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">JSON View of Posts</a>
-    <div class="mdl-layout-spacer"></div>
-    <!--button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">favorite</i></button>
-    <button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">share</i></button -->
-    
-  <a href="/Public/pics/{{.Image}}" class="mdl-button mdl-button--icon mdl-button--colored" ><i class="material-icons">search</i></a>
-
-<form>
-    <button type="submit" formmethod="post" formaction="/blog_posts/delete/{{.ID}}/{{.Image}}">Del <i class="material-icons">delete</i></button>
-</form>
-
-
-  </div>
-</div>
-</div>
-
-<br><br><br><br>
-  <tbody>
+ <tbody>
     <tr>
       <td class="mdl-data-table__cell--non-numeric">{{ .ID }}</td>
 
@@ -72,13 +43,44 @@
 {{ end }}
 </table>
 
-<br>
-<hr>
-<br>
-<md-card>
-  
+<div class="container-fluid">
+      
 
-<div class="mdl-layout mdl-js-layout mdl-color--grey-100" style="width: 850px;">
+{{ range . }}
+
+<div class="col-md-3 col-sm-4 col-xs-6">
+
+  <div class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--2dp col-sm-3" style="height: 700px;">
+  <figure class="mdl-card__media">
+    <img src="/Public/pics/{{ .Image }}" repeat alt="" />
+  </figure>
+  <div class="mdl-card__title">
+    <h1 class="mdl-card__title-text">{{ .ID }} - {{ .Category }} - PN: {{ .Image }}</h1>
+  </div>
+  <div class="mdl-card__supporting-text" style="height:100%;">
+    <p>{{ .Content }} </p>
+  </div>
+  <div class="mdl-card__actions mdl-card--border">
+    <a href="/api/blog_posts" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">JSON View of Posts</a>
+    <div class="mdl-layout-spacer"></div>
+    <!--button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">favorite</i></button>
+    <button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">share</i></button -->
+    
+  <a href="/Public/pics/{{.Image}}" class="mdl-button mdl-button--icon mdl-button--colored" ><i class="material-icons">search</i></a>
+
+<form>
+    <button type="submit" formmethod="post" formaction="/blog_posts/delete/{{.ID}}/{{.Image}}">Del <i class="material-icons">delete</i></button>
+</form>
+
+</div>
+
+</div>
+</div>
+
+{{ end }}
+
+<div class="container-fluid">
+  <div class="mdl-color--grey-100 blog-form" style="width: 850px;">
 	<main class="mdl-layout__content" style="width: 850px;">
 		<div class="mdl-card mdl-shadow--6dp" style="width: 850px;">
 			<div class="mdl-card__title mdl-color--primary mdl-color-text--white">
@@ -124,10 +126,9 @@
 		</div>
 	</main>
 </div>
-
-
 </a>
 </md-card>
+</div>
 
 {{template "footer"}}
 <!-- Your content goes here --></div>

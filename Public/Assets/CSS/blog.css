@@ -22,6 +22,7 @@ a:hover {
 
     .mdl-card {
       width: 350px;
+      height: 700px;
     }
 
     .mdl-textfield {
@@ -32,4 +33,8 @@ a:hover {
 
     .mdl-layout__container {
         height: auto;
+    }
+
+    .blog-form {
+      margin: 50px auto;
     }
