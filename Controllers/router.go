@@ -1,17 +1,15 @@
 package srvCtrl
 
 import (
-	"html/template"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
+	adminCtrl "github.com/tknott95/MasterGo/Controllers/AdminCtrl"
 	blogCtrl "github.com/tknott95/MasterGo/Controllers/BlogCtrl"
 	langCtrl "github.com/tknott95/MasterGo/Controllers/LangCtrl"
 	// twilioCtrl "github.com/tknott95/MasterGo/Controllers/TwilioCtrl"
 	globals "github.com/tknott95/MasterGo/Globals"
 )
-
-var tmpl = template.Must(template.ParseGlob("./Views/*"))
 
 func InitServer() {
 	mux := httprouter.New()
@@ -28,6 +26,9 @@ func InitServer() {
 	mux.GET("/blog_posts", blogFetch)
 	mux.POST("/blog_posts/add", blogCtrl.BlogPostAdd)
 	mux.POST("/blog_posts/delete/:post_id/:pic_rmv", blogCtrl.BlogPostDel)
+
+	// Admin Login
+	mux.GET("/admin_signin", adminCtrl.AdminLogin)
 
 	/* UMBRELLA API PORTION */
 	/* Will use /api/ always! */
@@ -47,7 +48,7 @@ func InitServer() {
 func index(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	println("📝 Currently on Index page.")
 
-	tmpl.ExecuteTemplate(w, "index.gohtml", nil)
+	globals.Tmpl.ExecuteTemplate(w, "index.gohtml", nil)
 }
 
 /* Base Fetch ALL Query Pages Rendered Here  */
@@ -55,11 +56,11 @@ func index(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 func langFetch(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	println("📝 Currently on Language Control page.")
 
-	tmpl.ExecuteTemplate(w, "langs_fetch.gohtml", langCtrl.FetchLangs())
+	globals.Tmpl.ExecuteTemplate(w, "langs_fetch.gohtml", langCtrl.FetchLangs())
 }
 
 func blogFetch(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	println("📝 Currently on Blog Post Control page.")
 
-	tmpl.ExecuteTemplate(w, "blog_control.gohtml", blogCtrl.BlogPostFetch())
+	globals.Tmpl.ExecuteTemplate(w, "blog_control.gohtml", blogCtrl.BlogPostFetch())
 }
