@@ -10,6 +10,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 
 	"github.com/julienschmidt/httprouter"
 	mydb "github.com/tknott95/MasterGo/Controllers/DbCtrl"
@@ -82,6 +83,7 @@ func BlogPostAdd(w http.ResponseWriter, req *http.Request, _ httprouter.Params) 
 	println("File name:", fname)
 
 	blogAuthor = "Trevor Knott"
+	blogTime := time.Now()
 	blogCategory = req.FormValue("blog_category")
 	blogContent = req.FormValue("blog_content")
 
@@ -92,12 +94,12 @@ func BlogPostAdd(w http.ResponseWriter, req *http.Request, _ httprouter.Params) 
 	println("Post Category :", blogCategory, "\n")
 	println("Post Content :", blogContent, "\n")
 
-	dbInsert, err := mydb.Store.DB.Prepare(`INSERT INTO blog_ctrl(blog_id, blog_title, blog_image, blog_category, blog_content, blog_author) VALUES(?, ?, ?, ?, ?, ?);`) // `INSERT INTO customer VALUES ("James");`
+	dbInsert, err := mydb.Store.DB.Prepare(`INSERT INTO blog_ctrl(blog_id, blog_title, blog_image, blog_category, blog_content, blog_author, blog_date) VALUES(?, ?, ?, ?, ?, ?, ?);`) // `INSERT INTO customer VALUES ("James");`
 	if err != nil {
 		println("Unable to insert language into mysql db.")
 	}
 
-	result, err := dbInsert.Exec(0, blogTitle, fname, blogCategory, blogContent, blogAuthor)
+	result, err := dbInsert.Exec(0, blogTitle, fname, blogCategory, blogContent, blogAuthor, blogTime)
 	if err != nil {
 		println("Error adding sql lang")
 	}
