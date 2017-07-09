@@ -1,2 +1,5 @@
 sendgrid.env
 sendgrid.env
+
+Globals/*
+/Globals/*

@@ -8,7 +8,7 @@
   justify-content: center;
 }
 
-.lang-card-wide.mdl-card, .blog-card-wide.mdl-card, .twilio-card-wide.mdl-card {
+.lang-card-wide.mdl-card, .sgrid-card-wide.mdl-card .blog-card-wide.mdl-card, .twilio-card-wide.mdl-card {
   width: 512px;
   margin: 40px auto;
 }
@@ -19,7 +19,7 @@
   background: url('https://ak5.picdn.net/shutterstock/videos/19642090/thumb/1.jpg') center / cover;
 }
 
-.lang-card-wide, .blog-card-wide, .twilio-card-wide > .mdl-card__menu {
+.lang-card-wide, .sgrid-card-wide, .blog-card-wide, .twilio-card-wide > .mdl-card__menu {
   color: #fff;
 }
 
@@ -37,4 +37,10 @@
   color: #fff;
   height: 176px;
   background: url('https://www.thermnagency.com/wp-content/uploads/2014/11/texting.jpg') center / cover;
+}
+
+.sgrid-card-wide > .mdl-card__title {
+  color: #fff;
+  height: 176px;
+  background: url('https://s3.amazonaws.com/lowres.cartoonstock.com/computers-email-spam-e_mail-emails-message-cgon61_low.jpg') center / cover;
 }

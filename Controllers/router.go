@@ -7,7 +7,7 @@ import (
 	adminCtrl "github.com/tknott95/MasterGo/Controllers/AdminCtrl"
 	blogCtrl "github.com/tknott95/MasterGo/Controllers/BlogCtrl"
 	langCtrl "github.com/tknott95/MasterGo/Controllers/LangCtrl"
-	// sGrid_Ctrl "github.com/tknott95/MasterGo/Controllers/SgridCtrl"
+	sGrid_Ctrl "github.com/tknott95/MasterGo/Controllers/SgridCtrl"
 	twilioCtrl "github.com/tknott95/MasterGo/Controllers/TwilioCtrl"
 	globals "github.com/tknott95/MasterGo/Globals"
 )
@@ -17,6 +17,9 @@ func InitServer() {
 
 	mux.GET("/twil_ctrl", twilioPage)
 	mux.POST("/txt", twilioCtrl.TwilioTest)
+
+	mux.GET("/sgrid_ctrl", sGridPage)
+	mux.POST("/email", sGrid_Ctrl.SendEmail)
 
 	// PC LANGS
 	mux.GET("/", index)
@@ -51,8 +54,6 @@ func InitServer() {
 func index(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	println("📝 Currently on Index page.")
 
-	// sGrid_Ctrl.SendEmail()
-
 	globals.Tmpl.ExecuteTemplate(w, "index.gohtml", nil)
 }
 
@@ -74,4 +75,10 @@ func twilioPage(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	println("📝 Currently on Twilio page.")
 
 	globals.Tmpl.ExecuteTemplate(w, "twilio_msg.gohtml", nil)
+}
+
+func sGridPage(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
+	println("📝 Currently on SendGrid page.")
+
+	globals.Tmpl.ExecuteTemplate(w, "sgrid_msg.gohtml", nil)
 }
