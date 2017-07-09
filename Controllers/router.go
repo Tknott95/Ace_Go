@@ -7,14 +7,15 @@ import (
 	adminCtrl "github.com/tknott95/MasterGo/Controllers/AdminCtrl"
 	blogCtrl "github.com/tknott95/MasterGo/Controllers/BlogCtrl"
 	langCtrl "github.com/tknott95/MasterGo/Controllers/LangCtrl"
-	// twilioCtrl "github.com/tknott95/MasterGo/Controllers/TwilioCtrl"
+	twilioCtrl "github.com/tknott95/MasterGo/Controllers/TwilioCtrl"
 	globals "github.com/tknott95/MasterGo/Globals"
 )
 
 func InitServer() {
 	mux := httprouter.New()
 
-	// twilioCtrl.TwilioTest()
+	mux.GET("/twil_ctrl", twilioPage)
+	mux.POST("/txt", twilioCtrl.TwilioTest)
 
 	// PC LANGS
 	mux.GET("/", index)
@@ -28,7 +29,8 @@ func InitServer() {
 	mux.POST("/blog_posts/delete/:post_id/:pic_rmv", blogCtrl.BlogPostDel)
 
 	// Admin Login
-	mux.GET("/admin_signin", adminCtrl.AdminLogin)
+	mux.GET("/admin_signin", adminCtrl.AdminPage)
+	mux.POST("/admin_sigin", adminCtrl.AdminLogin)
 
 	/* UMBRELLA API PORTION */
 	/* Will use /api/ always! */
@@ -63,4 +65,10 @@ func blogFetch(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	println("📝 Currently on Blog Post Control page.")
 
 	globals.Tmpl.ExecuteTemplate(w, "blog_control.gohtml", blogCtrl.BlogPostFetch())
+}
+
+func twilioPage(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
+	println("📝 Currently on Twilio page.")
+
+	globals.Tmpl.ExecuteTemplate(w, "twilio_msg.gohtml", nil)
 }
