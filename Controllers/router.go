@@ -7,6 +7,7 @@ import (
 	adminCtrl "github.com/tknott95/MasterGo/Controllers/AdminCtrl"
 	blogCtrl "github.com/tknott95/MasterGo/Controllers/BlogCtrl"
 	langCtrl "github.com/tknott95/MasterGo/Controllers/LangCtrl"
+	// sGrid_Ctrl "github.com/tknott95/MasterGo/Controllers/SgridCtrl"
 	twilioCtrl "github.com/tknott95/MasterGo/Controllers/TwilioCtrl"
 	globals "github.com/tknott95/MasterGo/Globals"
 )
@@ -49,6 +50,8 @@ func InitServer() {
 
 func index(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	println("📝 Currently on Index page.")
+
+	// sGrid_Ctrl.SendEmail()
 
 	globals.Tmpl.ExecuteTemplate(w, "index.gohtml", nil)
 }
