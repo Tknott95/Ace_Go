@@ -1,5 +1,6 @@
 sendgrid.env
-sendgrid.env
 
-Globals/*
+**/Globals/*
 /Globals/*
+/Globals/env.go
+env.go
