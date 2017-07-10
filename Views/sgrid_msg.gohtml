@@ -6,9 +6,20 @@
 
 <form action="/email" method="POST">
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <input class="mdl-textfield__input" name="mail-to-trev" type="text" id="msg-to-trev">
+    <input class="mdl-textfield__input" minlength="2" name="mail-from" type="email" id="mail-from">
+    <label class="mdl-textfield__label" for="mail-from">Email From?</label>
+  </div>
+
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" minlength="2" name="mail-subj" type="text" id="mail-subj">
+    <label class="mdl-textfield__label" for="mail-subj">Email Subject</label>
+  </div>
+
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" minlength="2" name="mail-to-trev" type="text" id="msg-to-trev">
     <label class="mdl-textfield__label" for="mail-to-trev">Message To Trevor</label>
   </div>
+
 
    <button value="lang_add" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect">
   <i class="material-icons">add</i>
