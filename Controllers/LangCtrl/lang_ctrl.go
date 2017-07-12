@@ -7,8 +7,8 @@ import (
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
-	mydb "github.com/tknott95/MasterGo/Controllers/DbCtrl"
-	Models "github.com/tknott95/MasterGo/Models"
+	mydb "github.com/tknott95/Ace_Go/Controllers/DbCtrl"
+	Models "github.com/tknott95/Ace_Go/Models"
 )
 
 func FetchLangs() []*Models.Lang {

@@ -4,7 +4,7 @@ import (
 	"database/sql"
 
 	_ "github.com/go-sql-driver/mysql"
-	Models "github.com/tknott95/MasterGo/Models"
+	Models "github.com/tknott95/Ace_Go/Models"
 )
 
 var Store = newDB()

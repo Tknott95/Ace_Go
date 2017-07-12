@@ -5,7 +5,7 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/sfreiberg/gotwilio"
-	globals "github.com/tknott95/MasterGo/Globals"
+	globals "github.com/tknott95/Ace_Go/Globals"
 )
 
 func TwilioTest(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {

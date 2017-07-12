@@ -6,9 +6,9 @@ import (
 	"os"
 
 	"github.com/julienschmidt/httprouter"
-	mydb "github.com/tknott95/MasterGo/Controllers/DbCtrl"
+	mydb "github.com/tknott95/Ace_Go/Controllers/DbCtrl"
 
-	globals "github.com/tknott95/MasterGo/Globals"
+	globals "github.com/tknott95/Ace_Go/Globals"
 )
 
 func AdminPage(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
@@ -51,5 +51,14 @@ func AdminLogin(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 		// tpl.ExecuteTemplate(w, "admin_users.gohtml", names)
 	} else {
 		fmt.Fprintf(w, "ADMIN - Log In Failed")
+	}
+}
+
+func IsAdminLoggedIn() bool {
+	if os.Getenv("admin") == "true" {
+		return true
+	} else {
+		return false
+
 	}
 }

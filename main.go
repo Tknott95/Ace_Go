@@ -1,8 +1,8 @@
 package main
 
 import (
+	srvCtrl "github.com/tknott95/Ace_Go/Controllers"
 	globals "github.com/tknott95/Inspired/Globals"
-	srvCtrl "github.com/tknott95/MasterGo/Controllers"
 )
 
 func main() {

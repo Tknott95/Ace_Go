@@ -6,12 +6,12 @@ import (
 	"github.com/rs/cors"
 
 	"github.com/julienschmidt/httprouter"
-	adminCtrl "github.com/tknott95/MasterGo/Controllers/AdminCtrl"
-	blogCtrl "github.com/tknott95/MasterGo/Controllers/BlogCtrl"
-	langCtrl "github.com/tknott95/MasterGo/Controllers/LangCtrl"
-	sGrid_Ctrl "github.com/tknott95/MasterGo/Controllers/SgridCtrl"
-	twilioCtrl "github.com/tknott95/MasterGo/Controllers/TwilioCtrl"
-	globals "github.com/tknott95/MasterGo/Globals"
+	adminCtrl "github.com/tknott95/Ace_Go/Controllers/AdminCtrl"
+	blogCtrl "github.com/tknott95/Ace_Go/Controllers/BlogCtrl"
+	langCtrl "github.com/tknott95/Ace_Go/Controllers/LangCtrl"
+	sGrid_Ctrl "github.com/tknott95/Ace_Go/Controllers/SgridCtrl"
+	twilioCtrl "github.com/tknott95/Ace_Go/Controllers/TwilioCtrl"
+	globals "github.com/tknott95/Ace_Go/Globals"
 )
 
 func InitServer() {

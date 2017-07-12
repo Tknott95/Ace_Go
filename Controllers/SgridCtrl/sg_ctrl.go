@@ -9,7 +9,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 	sendgrid "github.com/sendgrid/sendgrid-go"
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
-	globals "github.com/tknott95/MasterGo/Globals"
+	globals "github.com/tknott95/Ace_Go/Globals"
 )
 
 func SendEmail(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
