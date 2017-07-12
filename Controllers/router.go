@@ -3,6 +3,8 @@ package srvCtrl
 import (
 	"net/http"
 
+	"github.com/rs/cors"
+
 	"github.com/julienschmidt/httprouter"
 	adminCtrl "github.com/tknott95/MasterGo/Controllers/AdminCtrl"
 	blogCtrl "github.com/tknott95/MasterGo/Controllers/BlogCtrl"
@@ -14,6 +16,19 @@ import (
 
 func InitServer() {
 	mux := httprouter.New()
+
+	/* CORS */
+	handler := cors.Default().Handler(mux)
+
+	c := cors.New(cors.Options{
+		AllowedOrigins:   []string{"http://trevorknott.io"},
+		AllowCredentials: true,
+	})
+
+	// Insert the middleware
+	handler = c.Handler(handler)
+
+	/* CORS END */
 
 	mux.GET("/twil_ctrl", twilioPage)
 	mux.POST("/txt", twilioCtrl.TwilioTest)
@@ -47,7 +62,7 @@ func InitServer() {
 
 	// handler for serving files
 	// mux.ServeFiles("/Public/*filepath", http.Dir("/var/www/Public/"))
-	http.ListenAndServe(globals.PortNumber, mux)
+	http.ListenAndServe(globals.PortNumber, handler)
 
 }
 
