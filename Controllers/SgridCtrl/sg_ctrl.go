@@ -16,13 +16,19 @@ func SendEmail(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	var fromWho string
 	var subjOfMail string
 	var mailToSend string
+	var nameOfSender string
 
 	fromWho = req.FormValue("mail-from")
 	subjOfMail = req.FormValue("mail-subj")
 	mailToSend = req.FormValue("mail-to-trev")
+	nameOfSender = req.FormValue("mail-author")
 
 	if subjOfMail == "" {
 		subjOfMail = "Sent From AceAdmin via. Sendgrid"
+	}
+
+	if nameOfSender == "" {
+		nameOfSender = "Hitler(ANON)"
 	}
 
 	if fromWho == "" {
@@ -30,8 +36,8 @@ func SendEmail(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	}
 
 	from := mail.NewEmail("TK - From AceAdmin", fromWho)
-	subject := subjOfMail
-	to := mail.NewEmail("TK - From AceAdmin", "tk@trevorknott.io")
+	subject := "From: " + nameOfSender + " Subj: " + subjOfMail
+	to := mail.NewEmail(fromWho+" - "+nameOfSender, "tk@trevorknott.io")
 	plainTextContent := mailToSend
 	htmlContent := "<strong>..." + mailToSend + "</strong>"
 	message := mail.NewSingleEmail(from, subject, to, plainTextContent, htmlContent)
