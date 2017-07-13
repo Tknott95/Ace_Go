@@ -2,7 +2,6 @@ package blogCtrl
 
 import (
 	"crypto/sha1"
-	"encoding/json"
 	"fmt"
 	"io"
 	"log"
@@ -35,13 +34,46 @@ func BlogPostFetch() []*Models.BlogPost {
 	return posts
 }
 
-func ApiBlogFetch(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
-	jsonData, err := json.Marshal(BlogPostFetch())
-	if err != nil {
-		fmt.Println("error: ", err)
+func BlogPostDel(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	if AdminCtrl.IsAdminLoggedIn() == true {
+		// GET PICNAME VIA FORM VALUE THEN REMOVE PIC FILE ON DELETE. USE same func as Adding Pics @TODO
+		var post_to_del string
+		post_to_del = ps.ByName("post_id")
+
+		var pic_to_rmv string
+		pic_to_rmv = ps.ByName("pic_rmv")
+
+		println("Blog Post to delete via id:", post_to_del)
+
+		stmt, err := mydb.Store.DB.Prepare(`DELETE FROM blog_ctrl WHERE blog_id= ?;`)
+		defer stmt.Close()
+
+		rows, err := stmt.Query(post_to_del)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer rows.Close()
+		for rows.Next() {
+			// ...
+		}
+		if err = rows.Err(); err != nil {
+			log.Fatal(err)
+		}
+
+		println(w, "DELETED BLOG POST BY ID:", post_to_del)
+
+		// create new file
+		currDir, err := os.Getwd()
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		os.Remove(currDir + "../../Public/pics/" + pic_to_rmv)
+	} else {
+		fmt.Fprintf(w, "Must be admin!")
 	}
 
-	w.Write(jsonData)
+	http.Redirect(w, req, "/blog_posts", 301)
 }
 
 func BlogPostAdd(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
@@ -112,48 +144,6 @@ func BlogPostAdd(w http.ResponseWriter, req *http.Request, _ httprouter.Params) 
 	println("Post Author :", blogAuthor, "\n")
 	println("Post Category :", blogCategory, "\n")
 	println("Post Content :", blogContent, "\n")
-
-	http.Redirect(w, req, "/blog_posts", 301)
-}
-
-func BlogPostDel(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
-	if AdminCtrl.IsAdminLoggedIn() == true {
-		// GET PICNAME VIA FORM VALUE THEN REMOVE PIC FILE ON DELETE. USE same func as Adding Pics @TODO
-		var post_to_del string
-		post_to_del = ps.ByName("post_id")
-
-		var pic_to_rmv string
-		pic_to_rmv = ps.ByName("pic_rmv")
-
-		println("Blog Post to delete via id:", post_to_del)
-
-		stmt, err := mydb.Store.DB.Prepare(`DELETE FROM blog_ctrl WHERE blog_id= ?;`)
-		defer stmt.Close()
-
-		rows, err := stmt.Query(post_to_del)
-		if err != nil {
-			log.Fatal(err)
-		}
-		defer rows.Close()
-		for rows.Next() {
-			// ...
-		}
-		if err = rows.Err(); err != nil {
-			log.Fatal(err)
-		}
-
-		println(w, "DELETED BLOG POST BY ID:", post_to_del)
-
-		// create new file
-		currDir, err := os.Getwd()
-		if err != nil {
-			fmt.Println(err)
-		}
-
-		os.Remove(currDir + "../../Public/pics/" + pic_to_rmv)
-	} else {
-		fmt.Fprintf(w, "Must be admin!")
-	}
 
 	http.Redirect(w, req, "/blog_posts", 301)
 }
