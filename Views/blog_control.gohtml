@@ -48,11 +48,11 @@
 
 {{ range . }}
 
-<div class="col-md-3 col-sm-4 col-xs-6">
+<div class=" col-md-4  col-xs-6">
 
   <div class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--2dp col-sm-3" style="height: 700px;">
   <figure class="mdl-card__media">
-    <img src="/Public/pics/{{ .Image }}" repeat alt="" />
+    <img src="http://ec2-54-153-114-109.us-west-1.compute.amazonaws.com/Public/pics/{{ .Image }}" repeat alt="" />
   </figure>
   <div class="mdl-card__title">
     <h1 class="mdl-card__title-text">{{ .ID }} - {{ .Category }} - PN: {{ .Image }}</h1>
@@ -66,7 +66,7 @@
     <!--button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">favorite</i></button>
     <button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">share</i></button -->
     
-  <a href="/Public/pics/{{.Image}}" class="mdl-button mdl-button--icon mdl-button--colored" ><i class="material-icons">search</i></a>
+  <a href="http://ec2-54-153-114-109.us-west-1.compute.amazonaws.com/Public/pics/{{.Image}}" class="mdl-button mdl-button--icon mdl-button--colored" ><i class="material-icons">search</i></a>
 
 <form>
     <button type="submit" formmethod="post" formaction="/blog_posts/delete/{{.ID}}/{{.Image}}">Del <i class="material-icons">delete</i></button>
@@ -79,7 +79,9 @@
 
 {{ end }}
 
-<div class="container-fluid">
+<br><br><br><br>
+
+<div class="form-top container-fluid">
   <div class="mdl-color--grey-100 blog-form" style="width: 850px;">
 	<main class="mdl-layout__content" style="width: 850px;">
 		<div class="mdl-card mdl-shadow--6dp" style="width: 850px;">

@@ -54,5 +54,5 @@ func SendEmail(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 		fmt.Println(response.Headers)
 	}
 
-	http.Redirect(w, req, "/", 301)
+	http.Redirect(w, req, "http://trevorknott.io", 301)
 }

@@ -49,6 +49,7 @@ func InitServer() {
 
 	// Admin Login
 	mux.GET("/admin_signin", adminCtrl.AdminPage)
+	mux.GET("/admin_logout", adminCtrl.AdminLogout)
 	mux.POST("/admin_sigin", adminCtrl.AdminLogin)
 
 	/* UMBRELLA API PORTION */

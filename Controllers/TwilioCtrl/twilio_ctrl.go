@@ -32,5 +32,5 @@ func TwilioTest(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 
 	println("Sending txt to TK (admin):", msgToSend)
 
-	http.Redirect(w, req, "/", 301)
+	http.Redirect(w, req, "http://trevorknott.io", 301)
 }
