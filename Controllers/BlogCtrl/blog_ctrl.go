@@ -18,7 +18,7 @@ import (
 )
 
 func BlogPostFetch() []*Models.BlogPost {
-	rows, err := mydb.Store.DB.Query("SELECT * FROM blog_ctrl;")
+	rows, err := mydb.Store.DB.Query("SELECT * FROM blog_ctrl ORDER BY blog_id DESC;")
 	if err != nil {
 		println("eRROR:", err)
 	}
@@ -79,7 +79,6 @@ func BlogPostDel(w http.ResponseWriter, req *http.Request, ps httprouter.Params)
 func BlogPostAdd(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	if AdminCtrl.IsAdminLoggedIn() == true {
 		var blogTitle string
-		// var blogImage string  /* String 4 testing run 1 */
 		var blogAuthor string /* Always Defaults to Trevor Knott on admin */
 		var blogCategory string
 		var blogContent string
@@ -144,6 +143,45 @@ func BlogPostAdd(w http.ResponseWriter, req *http.Request, _ httprouter.Params) 
 		println("Post Author :", blogAuthor, "\n")
 		println("Post Category :", blogCategory, "\n")
 		println("Post Content :", blogContent, "\n")
+
+		http.Redirect(w, req, "/blog_posts", 301)
+	} else {
+		fmt.Fprintf(w, "Must be named Trevor Knott yo he is admin!")
+	}
+}
+
+func BlogUpdate(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	if AdminCtrl.IsAdminLoggedIn() == true {
+		var blogID string
+		var blogTitle string
+		var blogAuthor string /* Always Defaults to Trevor Knott on admin */
+		var blogCategory string
+		var blogContent string
+		// var blogTime string
+
+		blogID = ps.ByName("blog_id")
+
+		blogAuthor = "Trevor Knott"
+		blogTime := time.Now()
+		blogCategory = req.FormValue("blog_category")
+		blogContent = req.FormValue("blog_content")
+
+		dbInsert, err := mydb.Store.DB.Prepare(`UPDATE blog_ctrl SET blog_title=?, blog_category=?, blog_content=?, blog_author=?, blog_date=?) VALUES(?, ?, ?, ?, ?) where blog_id=?;`) // `INSERT INTO customer VALUES ("James");`
+		if err != nil {
+			println("Unable to insert language into mysql db.")
+		}
+
+		result, err := dbInsert.Exec(blogTitle, blogCategory, blogContent, blogAuthor, blogTime, blogID)
+		if err != nil {
+			println("Error adding sql lang")
+		}
+		fmt.Println(w, "ADD RECORD By NAME:", blogTitle, "RESULT:", result)
+
+		println("Post Title: ", blogTitle, "\n")
+		println("Post Author: ", blogAuthor, "\n")
+		println("Post Category: ", blogCategory, "\n")
+		println("Post Content: ", blogContent, "\n")
+		// println("Post Time Published: ", blogTime, "\n")
 
 		http.Redirect(w, req, "/blog_posts", 301)
 	} else {

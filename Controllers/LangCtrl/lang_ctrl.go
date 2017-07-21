@@ -89,3 +89,28 @@ func LangAdd(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 		fmt.Fprintf(w, "Must be named Trevor Knott yo he is admin!")
 	}
 }
+
+func LangUpdate(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	if AdminCtrl.IsAdminLoggedIn() == true {
+
+		var updID string
+		var newName string
+
+		newName = req.FormValue("new-lang")
+		updID = ps.ByName("l-id")
+
+		stmt, err := mydb.Store.DB.Prepare(`UPDATE pc_langs SET lang_name=? WHERE lang_id=?`) // `INSERT INTO customer VALUES ("James");`
+		if err != nil {
+			println("Unable to insert language into mysql db.")
+		}
+		result, err := stmt.Exec(newName, updID)
+		if err != nil {
+			println("Error adding sql lang")
+		}
+
+		println("Lang ID: ", updID, " Updated: ", newName, "Mem Address: ", result)
+
+	} else {
+		fmt.Fprintf(w, "Must be named Trevor Knott yo he is admin!")
+	}
+}

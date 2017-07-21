@@ -40,11 +40,13 @@ func InitServer() {
 	mux.GET("/", index)
 	mux.GET("/pc_langs", langFetch)
 	mux.POST("/pc_langs/delete/:lang_id", langCtrl.LangDelete) /* Calls both via. url not form val */
-	mux.POST("/pc_langs/add", langCtrl.LangAdd)                /* will use formval in blog portion for sure tho */
+	mux.POST("/pc_langs/add", langCtrl.LangAdd)
+	mux.POST("/pc_langs/update/:l-id", langCtrl.LangUpdate) /* will use formval in blog portion for sure tho */
 
 	// BLOG POSTS
 	mux.GET("/blog_posts", blogFetch)
 	mux.POST("/blog_posts/add", blogCtrl.BlogPostAdd)
+	mux.POST("/blog_posts/update/:blog_id", blogCtrl.BlogUpdate)
 	mux.POST("/blog_posts/delete/:post_id/:pic_rmv", blogCtrl.BlogPostDel)
 
 	// Admin Login
