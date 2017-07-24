@@ -45,6 +45,7 @@ func InitServer() {
 
 	// BLOG POSTS
 	mux.GET("/blog_posts", blogFetch)
+	mux.GET("/blog_posts/edit/:post-id", blogCtrl.SinglePostFetch)
 	mux.POST("/blog_posts/add", blogCtrl.BlogPostAdd)
 	mux.POST("/blog_posts/update/:blog_id", blogCtrl.BlogUpdate)
 	mux.POST("/blog_posts/delete/:post_id/:pic_rmv", blogCtrl.BlogPostDel)

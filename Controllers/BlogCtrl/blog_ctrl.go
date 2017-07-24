@@ -14,6 +14,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 	AdminCtrl "github.com/tknott95/Ace_Go/Controllers/AdminCtrl"
 	mydb "github.com/tknott95/Ace_Go/Controllers/DbCtrl"
+	globals "github.com/tknott95/Ace_Go/Globals"
 	Models "github.com/tknott95/Ace_Go/Models"
 )
 
@@ -32,6 +33,33 @@ func BlogPostFetch() []*Models.BlogPost {
 		posts = append(posts, &post)
 	}
 	return posts
+}
+
+func SinglePostFetch(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	post_to_edit := ps.ByName("post-id")
+	stmt, err := mydb.Store.DB.Prepare("SELECT * FROM blog_ctrl WHERE blog_id=? ORDER BY blog_id DESC;")
+	if err != nil {
+		println("eRROR:", err)
+	}
+	defer stmt.Close()
+
+	rows, err := stmt.Query(post_to_edit)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	posts := []*Models.BlogPost{}
+	for rows.Next() {
+		var post Models.BlogPost
+		err = rows.Scan(&post.ID, &post.Title, &post.Image, &post.Category, &post.Content, &post.Author, &post.Date)
+
+		posts = append(posts, &post)
+	}
+	// return posts
+
+	globals.Tmpl.ExecuteTemplate(w, "blog_edit.gohtml", posts)
+
 }
 
 func BlogPostDel(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
@@ -187,4 +215,10 @@ func BlogUpdate(w http.ResponseWriter, req *http.Request, ps httprouter.Params) 
 	} else {
 		fmt.Fprintf(w, "Must be named Trevor Knott yo he is admin!")
 	}
+}
+
+func BlogEdit(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
+	println("📝 Currently on Edit Blog page.")
+
+	globals.Tmpl.ExecuteTemplate(w, "blog_edit.gohtml", BlogPostFetch())
 }
