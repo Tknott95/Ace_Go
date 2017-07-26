@@ -46,6 +46,7 @@ func InitServer() {
 
 	// BLOG POSTS
 	mux.GET("/blog_posts", blogFetch)
+	mux.GET("/blog_posts/add", blogAddPage)
 	mux.GET("/blog_posts/edit/:post-id", blogCtrl.SinglePostFetch)
 	mux.POST("/blog_posts/edit/:blog-id", blogCtrl.BlogUpdate)
 	mux.POST("/blog_posts/add", blogCtrl.BlogPostAdd)
@@ -90,6 +91,12 @@ func blogFetch(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	println("📝 Currently on Blog Post Control page.")
 
 	globals.Tmpl.ExecuteTemplate(w, "blog_control.gohtml", blogCtrl.BlogPostFetch())
+}
+
+func blogAddPage(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
+	println("📝 Currently on Blog Post Control page.")
+
+	globals.Tmpl.ExecuteTemplate(w, "blog_add.gohtml", blogCtrl.BlogPostFetch())
 }
 
 func twilioPage(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {

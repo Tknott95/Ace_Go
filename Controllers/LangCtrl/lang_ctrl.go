@@ -135,11 +135,12 @@ func LangSingleFetch(w http.ResponseWriter, req *http.Request, ps httprouter.Par
 
 	langs := []*Models.Lang{}
 	for rows.Next() {
-		var l Models.Lang
+		var lang Models.Lang
+		err = rows.Scan(&lang.ID, &lang.LangName)
 
-		langs = append(langs, &l)
+		langs = append(langs, &lang)
 	}
 
-	globals.Tmpl.ExecuteTemplate(w, "lang_edit.gohtml", langs)
+	globals.Tmpl.ExecuteTemplate(w, "langs_edit.gohtml", langs)
 
 }
