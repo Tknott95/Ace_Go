@@ -36,6 +36,9 @@ func BlogPostFetch() []*Models.BlogPost {
 }
 
 func SinglePostFetch(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+
+	println("📝 Currently on Edit Blog page.")
+
 	post_to_edit := ps.ByName("post-id")
 	stmt, err := mydb.Store.DB.Prepare("SELECT * FROM blog_ctrl WHERE blog_id=? ORDER BY blog_id DESC;")
 	if err != nil {
@@ -56,7 +59,6 @@ func SinglePostFetch(w http.ResponseWriter, req *http.Request, ps httprouter.Par
 
 		posts = append(posts, &post)
 	}
-	// return posts
 
 	globals.Tmpl.ExecuteTemplate(w, "blog_edit.gohtml", posts)
 
@@ -178,8 +180,8 @@ func BlogPostAdd(w http.ResponseWriter, req *http.Request, _ httprouter.Params) 
 	}
 }
 
-func BlogUpdate(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
-	if AdminCtrl.IsAdminLoggedIn() == true {
+func BlogUpdate(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
+	if AdminCtrl.IsAdminLoggedIn() == false {
 		var blogID string
 		var blogTitle string
 		var blogAuthor string /* Always Defaults to Trevor Knott on admin */
@@ -187,14 +189,15 @@ func BlogUpdate(w http.ResponseWriter, req *http.Request, ps httprouter.Params) 
 		var blogContent string
 		// var blogTime string
 
-		blogID = ps.ByName("blog_id")
+		blogID = req.FormValue("blog-id")
 
-		blogAuthor = "Trevor Knott"
-		blogTime := time.Now()
-		blogCategory = req.FormValue("blog_category")
-		blogContent = req.FormValue("blog_content")
+		blogAuthor = req.FormValue("blog-author")
+		blogTitle = req.FormValue("blog-title")
+		blogTime := req.FormValue("blog-date")
+		blogCategory = req.FormValue("blog-category")
+		blogContent = req.FormValue("blog-content")
 
-		dbInsert, err := mydb.Store.DB.Prepare(`UPDATE blog_ctrl SET blog_title=?, blog_category=?, blog_content=?, blog_author=?, blog_date=?) VALUES(?, ?, ?, ?, ?) where blog_id=?;`) // `INSERT INTO customer VALUES ("James");`
+		dbInsert, err := mydb.Store.DB.Prepare(`UPDATE blog_ctrl SET blog_title=?, blog_category=?, blog_content=?, blog_author=?, blog_date=? WHERE blog_id=?;`) // `INSERT INTO customer VALUES ("James");`
 		if err != nil {
 			println("Unable to insert language into mysql db.")
 		}
@@ -217,8 +220,27 @@ func BlogUpdate(w http.ResponseWriter, req *http.Request, ps httprouter.Params) 
 	}
 }
 
-func BlogEdit(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
-	println("📝 Currently on Edit Blog page.")
+// func LangUpdate(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+// 	if AdminCtrl.IsAdminLoggedIn() == true {
 
-	globals.Tmpl.ExecuteTemplate(w, "blog_edit.gohtml", BlogPostFetch())
-}
+// 		var updID string
+// 		var newName string
+
+// 		newName = req.FormValue("new-lang")
+// 		updID = ps.ByName("l-id")
+
+// 		stmt, err := mydb.Store.DB.Prepare(`UPDATE pc_langs SET lang_name=? WHERE lang_id=?`) // `INSERT INTO customer VALUES ("James");`
+// 		if err != nil {
+// 			println("Unable to insert language into mysql db.")
+// 		}
+// 		result, err := stmt.Exec(newName, updID)
+// 		if err != nil {
+// 			println("Error adding sql lang")
+// 		}
+
+// 		println("Lang ID: ", updID, " Updated: ", newName, "Mem Address: ", result)
+
+// 	} else {
+// 		fmt.Fprintf(w, "Must be named Trevor Knott yo he is admin!")
+// 	}
+// }

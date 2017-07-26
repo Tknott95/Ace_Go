@@ -62,7 +62,7 @@ func AdminLogin(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 
 		// tpl.ExecuteTemplate(w, "admin_users.gohtml", names)
 	} else {
-		fmt.Fprintf(w, "ADMIN - Log In Failed <a>GO BACK</a>")
+		fmt.Fprintf(w, "ADMIN - Log In Failed")
 		os.Setenv("admin", "false")
 	}
 }

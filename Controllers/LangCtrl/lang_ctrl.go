@@ -8,6 +8,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 	AdminCtrl "github.com/tknott95/Ace_Go/Controllers/AdminCtrl"
 	mydb "github.com/tknott95/Ace_Go/Controllers/DbCtrl"
+	globals "github.com/tknott95/Ace_Go/Globals"
 	Models "github.com/tknott95/Ace_Go/Models"
 )
 
@@ -96,7 +97,7 @@ func LangUpdate(w http.ResponseWriter, req *http.Request, ps httprouter.Params) 
 		var updID string
 		var newName string
 
-		newName = req.FormValue("new-lang")
+		newName = req.FormValue("lang-title")
 		updID = ps.ByName("l-id")
 
 		stmt, err := mydb.Store.DB.Prepare(`UPDATE pc_langs SET lang_name=? WHERE lang_id=?`) // `INSERT INTO customer VALUES ("James");`
@@ -113,4 +114,32 @@ func LangUpdate(w http.ResponseWriter, req *http.Request, ps httprouter.Params) 
 	} else {
 		fmt.Fprintf(w, "Must be named Trevor Knott yo he is admin!")
 	}
+}
+
+func LangSingleFetch(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	var langID = ps.ByName("lang-id")
+
+	println("📝 Currently on Edit Lang page.")
+
+	stmt, err := mydb.Store.DB.Prepare("SELECT * FROM pc_langs WHERE lang_id=?")
+	if err != nil {
+		println("eRROR:", err)
+	}
+	defer stmt.Close()
+
+	rows, err := stmt.Query(langID)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	langs := []*Models.Lang{}
+	for rows.Next() {
+		var l Models.Lang
+
+		langs = append(langs, &l)
+	}
+
+	globals.Tmpl.ExecuteTemplate(w, "lang_edit.gohtml", langs)
+
 }
