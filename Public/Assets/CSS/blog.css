@@ -22,6 +22,10 @@ a:hover {
       max-width: 80%;
   }
 
+  tr, td {
+    height: 700px;
+  }
+
   img {
       max-height: 400px;
     }

@@ -6,6 +6,9 @@
 <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
   <thead>
     <tr class="tr-tk">
+      <th class="mdl-data-table__cell--non-numeric">Delete Posts</th>
+
+      <th class="mdl-data-table__cell--non-numeric">Edit Posts</th>
       <th class="mdl-data-table__cell--non-numeric">Blog Posts</th>
       <th class="mdl-data-table__cell--non-numeric">Title</th>
       <th class="mdl-data-table__cell--non-numeric">Image</th>
@@ -16,13 +19,32 @@
     </tr>
   </thead>
 
-{{ range . }}
+  {{ range . }}
 
- <tbody>
+  <tbody>
     <tr>
+
+      <td class="mdl-data-table__cell--non-numeric">
+
+        <form>
+          <button type="submit" formmethod="post" formaction="/blog_posts/delete/{{.ID}}/{{.Image}}">Del <i class="material-icons">delete</i></button>
+        </form>
+
+      </td>
+
+      <td class="mdl-data-table__cell--non-numeric">
+
+
+        <form>
+          <button type="submit" formmethod="get" formaction="/blog_posts/edit/{{.ID}}">EDIT <i class="material-icons">edit</i></button>
+        </form>
+
+
+      </td>
+
       <td class="mdl-data-table__cell--non-numeric">{{ .ID }}</td>
 
-            <td class="mdl-data-table__cell--non-numeric">{{ .Title }}</td>
+      <td class="mdl-data-table__cell--non-numeric">{{ .Title }}</td>
 
       <td class="mdl-data-table__cell--non-numeric">{{ .Image }}</td>
 
@@ -30,64 +52,60 @@
       <td class="mdl-data-table__cell--non-numeric">{{ .Category }}</td>
 
 
-            <td class="mdl-data-table__cell--non-numeric">{{ .Content }} </td>
+      <td class="mdl-data-table__cell--non-numeric">{{ .Content }} </td>
 
-            <td>{{ .Author }}</td>
+      <td>{{ .Author }}</td>
 
-            <td>{{ .Date }}</td>
+      <td>{{ .Date }}</td>
 
 
     </tr>
   </tbody>
 
-{{ end }}
+  {{ end }}
 </table>
 
 <div class="container-fluid">
-      
 
-{{ range . }}
 
-<div class=" col-md-4  col-xs-6">
+  {{ range . }}
 
-  <div class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--2dp col-sm-3" style="height: 700px;">
-  <figure class="mdl-card__media">
-    <img src="http://ec2-54-153-114-109.us-west-1.compute.amazonaws.com/Public/pics/{{ .Image }}" repeat alt="" />
-  </figure>
-  <div class="mdl-card__title">
-    <h1 class="mdl-card__title-text">{{ .ID }} - {{ .Category }} - PN: {{ .Image }}</h1>
-  </div>
-  <div class="mdl-card__supporting-text" style="height:100%;">
-    <p>{{ .Content }} </p>
-  </div>
-  <div class="mdl-card__actions mdl-card--border">
-    <a href="/api/blog_posts" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">JSON View of Posts</a>
-    <div class="mdl-layout-spacer"></div>
-    <!--button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">favorite</i></button>
+  <div class=" col-md-4  col-xs-6">
+
+    <div class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--2dp col-sm-3" style="height: 700px;">
+      <figure class="mdl-card__media">
+        <img src="http://ec2-54-153-114-109.us-west-1.compute.amazonaws.com/Public/pics/{{ .Image }}" repeat alt="" />
+      </figure>
+      <div class="mdl-card__title">
+        <h1 class="mdl-card__title-text">{{ .ID }} - {{ .Category }} - PN: {{ .Image }}</h1>
+      </div>
+      <div class="mdl-card__supporting-text" style="height:100%;">
+        <p>{{ .Content }} </p>
+      </div>
+      <div class="mdl-card__actions mdl-card--border">
+        <a href="/api/blog_posts" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">JSON View of Posts</a>
+        <div class="mdl-layout-spacer"></div>
+        <!--button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">favorite</i></button>
     <button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">share</i></button -->
-    
-  <a href="http://ec2-54-153-114-109.us-west-1.compute.amazonaws.com/Public/pics/{{.Image}}" class="mdl-button mdl-button--icon mdl-button--colored" ><i class="material-icons">search</i></a>
 
-<form>
-    <button type="submit" formmethod="post" formaction="/blog_posts/delete/{{.ID}}/{{.Image}}">Del <i class="material-icons">delete</i></button>
-</form>
+        <a href="http://ec2-54-153-114-109.us-west-1.compute.amazonaws.com/Public/pics/{{.Image}}" class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">search</i></a>
 
-<form>
-    <button type="submit" formmethod="get" formaction="/blog_posts/edit/{{.ID}}">EDIT <i class="material-icons">edit</i></button>
-</form>
+        <form>
+          <button type="submit" formmethod="post" formaction="/blog_posts/delete/{{.ID}}/{{.Image}}">Del <i class="material-icons">delete</i></button>
+        </form>
 
-</div>
+        <form>
+          <button type="submit" formmethod="get" formaction="/blog_posts/edit/{{.ID}}">EDIT <i class="material-icons">edit</i></button>
+        </form>
 
-</div>
-</div>
+      </div>
 
-
-
-
-{{ end }}
-
-<br><br><br><br>
+    </div>
+  </div>
 
 
 
-{{template "footer"}}
+
+  {{ end }}
+
+  <br><br><br><br> {{template "footer"}}
