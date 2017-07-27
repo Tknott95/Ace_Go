@@ -145,7 +145,7 @@ func BlogPostAdd(w http.ResponseWriter, req *http.Request, _ httprouter.Params) 
 		println("File name:", fname)
 
 		blogAuthor = "Trevor Knott"
-		blogTime := time.Now()
+		blogTime := time.Now().Format("dd-mm-yyyy")
 		blogCategory = req.FormValue("blog_category")
 		blogContent = req.FormValue("blog_content")
 
@@ -181,7 +181,7 @@ func BlogPostAdd(w http.ResponseWriter, req *http.Request, _ httprouter.Params) 
 }
 
 func BlogUpdate(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
-	if AdminCtrl.IsAdminLoggedIn() == false {
+	if AdminCtrl.IsAdminLoggedIn() == true {
 		var blogID string
 		var blogTitle string
 		var blogAuthor string /* Always Defaults to Trevor Knott on admin */

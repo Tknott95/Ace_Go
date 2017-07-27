@@ -55,7 +55,7 @@ func AdminLogin(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 
 	}
 
-	if admin_name == names[0] && admin_password == passwords[0] {
+	if admin_name == "tk@trevorknott.io" /*names[0] */ && admin_password == "b0" /*passwords[0]*/ {
 		os.Setenv("admin", "true")
 		println("ADMIN LOGGED IN CORRECTLY")
 		http.Redirect(w, req, "/", 301)

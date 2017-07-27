@@ -1,55 +1,55 @@
+
+
 {{template "header"}}
 
-<br><br><br><br><br><br><br>
+<link rel="stylesheet" href="/Public/Assets/CSS/blog-edit.css">
 
 
+<form action="/blog_posts/add" method="POST" enctype="multipart/form-data">
 
-<div class="form-top container-fluid">
-  <div class="mdl-color--grey-100 blog-form" style="width: 850px;">
-	<main class="mdl-layout__content" style="width: 850px;">
-		<div class="mdl-card mdl-shadow--6dp" style="width: 850px;">
-			<div class="mdl-card__title mdl-color--primary mdl-color-text--white">
-				<h2 class="mdl-card__title-text">Add Blog Post</h2>
-			</div>
-	  	<div class="mdl-card__supporting-text">
-				<form action="/blog_posts/add" method="POST" enctype="multipart/form-data">
-          
-          <div class="mdl-textfield mdl-js-textfield">
-						<input class="mdl-textfield__input" minlength="2" id="blog_title" type="text" name="blog_title" />
-						<label class="mdl-textfield__label" for="blog_title">Blog Title</label>
-					</div>
+<h1>Add New Blog Post</h1>
 
-          <div class="mdl-textfield mdl-js-textfield">
-						<input class="mdl-textfield__input" type="file" name="blog_image" />
-					</div>
 
-          <div class="mdl-textfield mdl-js-textfield">
-						<input class="mdl-textfield__input" disabled name="Trevor Knott" type="text" id="author" />
-						<label class="mdl-textfield__label" disabled value="Trevor Knott" for="authoor">Trevor Knott</label>
-					</div>
-
-					<div class="mdl-textfield mdl-js-textfield">
-						<input class="mdl-textfield__input" type="text" minlength="2" name="blog_category" />
-						<label class="mdl-textfield__label" for="blog_category">Blog Category</label>
-					</div>
-
-					<div class="mdl-textfield mdl-js-textfield">
-						<textarea class="mdl-textfield__input" type="textarea" minlength="20" rows="4" name="blog_content"></textarea>
-						<label class="mdl-textfield__label" for="blog_content">Blog Content</label>
-					</div>
-          <div class="mdl-card__actions mdl-card--border">
-				<button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Add Blog Post</button>
-			</div>
-				</form>
-			</div>
-			
-		</div>
-	</main>
+<div class="form-group row">
+  <label for="example-text-input" class="col-2 col-form-label">Blog Title</label>
+  <div class="col-10">
+    <input class="input-lg form-control" name="blog_title" type="text" value="" id="blog_title">
+  </div>
 </div>
-</a>
-</md-card>
+<div class="form-group row">
+  <label for="example-search-input" class="col-2 col-form-label">Blog Category</label>
+  <div class="col-10">
+    <input name="blog_category" class="input-lg form-control" type="text" value="" id="blog_category">
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-email-input" class="col-2 col-form-label">Blog Author</label>
+  <div class="col-10">
+    <input disabled name="blog-author" class="input-lg form-control" type="text" value="Trevor Knott" id="example-email-input">
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-url-input" class="col-2 col-form-label">Blog Image</label>
+  <div class="col-10">
+	<input class="mdl-textfield__input" type="file" name="blog_image" />
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-tel-input" class="col-2 col-form-label">Blog Content</label>
+  <div class="col-10">
+    <textarea name="blog_content" class="form-control input-lg" cols="40" rows="15" id="example-tel-input"> </textarea>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-password-input" class="col-2 col-form-label">Blog Date</label>
+  <div class="col-10">
+    <input disabled name="blog-date" class="form-control" type="text" value="2017" id="example-password-input">
+  </div>
 </div>
 
+<button type="submit" class="btn btn-block btn-primary btn-lg">Add Blog Post</button>
+
+</form>
 
 
 {{template "footer"}}
