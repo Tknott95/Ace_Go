@@ -1,0 +1,68 @@
+{{define "header"}}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Trevor Knott's Backend Golang Admin Board. GTFO we geolocate via. DNS.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta name="keywords" content="HTML,CSS,XML,JavaScript, tips, young, programmer, typescript, Trevor, Knott, Trevorknott, Golang, Go, Angular2, Angular, Angular4, Colorado, Developer, Denver, Engineer, CRUD, SQL, tk, tex knott, tex, Colorado, mile high, hire, freelancer">
+
+  <base href="/">
+
+  <title>TK | HOME</title>
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-light_blue.min.css" />
+
+  <link rel="stylesheet" href="/Public/Assets/CSS/index.css">
+
+</head>
+
+<body>
+
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
+            mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <div class="mdl-layout-spacer"></div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+                  mdl-textfield--floating-label mdl-textfield--align-right">
+          <label class="mdl-button mdl-js-button mdl-button--icon" for="fixed-header-drawer-exp">
+          <i class="material-icons">search</i>
+        </label>
+          <div class="mdl-textfield__expandable-holder">
+            <input class="mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp">
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="mdl-layout__drawer">
+      <span class="mdl-layout-title">TREVOR<strong>KNOTT</strong></span>
+      <nav class="mdl-navigation">
+        <label class="text-center">Main Backend Controllers</label>
+
+        <a class="mdl-navigation__link" href="/"><i class="material-icons">home</i></i> Home</a>
+        <a class="mdl-navigation__link" href="/pc_langs"><i class="material-icons">code</i> Computer Langs</a>
+        <a class="mdl-navigation__link" href="/blog_posts"><i class="material-icons">library_books</i> Blog Posts</a>
+        <a class="mdl-navigation__link" href="/blog_posts/add"><i class="material-icons">library_books</i> Blog Add</a>
+        <a class="mdl-navigation__link" href="/twil_ctrl"><i class="material-icons">&#xE8A8;</i> Twil Control</a>
+        <a class="mdl-navigation__link" href="/sgrid_ctrl"><i class="material-icons">contact_mail</i> SGrid Control</a>
+        <br>
+        <hr><br>
+        <label class="text-center">Authentication Related</label>
+        <a class="mdl-navigation__link" href="/admin_signin"><i class="material-icons">lock_open</i> Admin Login</a>
+        <a class="mdl-navigation__link" href="/admin_logout"><i class="material-icons">lock</i> Admin Logout</a>
+        <br>
+        <hr><br>
+        <label class="text-center">Connecting Angular4 Applications</label>
+        <a class="mdl-navigation__link" href="http://www.trevorknott.io"><i class="material-icons">face</i> TREVORKNOTT.IO</a>
+
+      </nav>
+    </div>
+    <main class="mdl-layout__content">
+      <div style="margin: auto 40px;">
+
+        {{end}}

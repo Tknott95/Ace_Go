@@ -1,0 +1,65 @@
+{{template "header"}}
+
+<link rel="stylesheet" href="/Public/Assets/CSS/blog-edit.css">
+
+
+
+{{ range . }}
+
+<form action="blog_posts/edit/{{.ID}}" method="POST">
+
+<h1>Edit: {{ .Title }}</h1>
+
+<div class="form-group row">
+  <label for="example-text-input" class="col-2 col-form-label">Blog ID</label>
+  <div class="col-10">
+    <input  class="input-lg form-control" name="blog-id" type="text" value="{{ .ID }}" id="example-text-input">
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-text-input" class="col-2 col-form-label">Blog Title</label>
+  <div class="col-10">
+    <input class="input-lg form-control" name="blog-title" type="text" value="{{ .Title }}" id="example-text-input">
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-search-input" class="col-2 col-form-label">Blog Category</label>
+  <div class="col-10">
+    <input  name="blog-category" class="input-lg form-control" type="text" value="{{ .Category }}" id="example-search-input">
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-email-input" class="col-2 col-form-label">Blog Author</label>
+  <div class="col-10">
+    <input  name="blog-author" class="input-lg form-control" type="text" value="{{ .Author }}" id="example-email-input">
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-url-input" class="col-2 col-form-label">Blog URL of Image</label>
+  <div class="col-10">
+    <input  name="blog-image" class="input-lg form-control" type="filename" value="{{ .Image }}" id="example-url-input">
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-tel-input" class="col-2 col-form-label">Blog Content</label>
+  <div class="col-10">
+    <textarea name="blog-content" class="form-control input-lg" cols="40" rows="15" value="{{ .Content }}" id="example-tel-input"> {{ .Content }}</textarea>
+  </div>
+</div>
+<div class="form-group row">
+  <label for="example-password-input" class="col-2 col-form-label">Blog Date</label>
+  <div class="col-10">
+    <input  name="blog-date" class="form-control" type="text" value="{{ .Date }}" id="example-password-input">
+  </div>
+</div>
+
+<button type="submit" class="btn btn-block btn-primary btn-lg">Submit Blog #{{ .ID }} Post Edit</button>
+
+
+
+</form>
+
+
+{{ end }}
+
+{{template "footer"}}
