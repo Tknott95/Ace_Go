@@ -32,7 +32,7 @@ func AdminLogin(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	admin_name = req.FormValue("admin-email")
 	admin_password = req.FormValue("admin-password")
 
-	rows, err := mydb.Store.DB.Query(`SELECT * FROM admin_users;`)
+	rows, err := mydb.Store.DB.Query(`SELECT admin_email, admil_password FROM admin_users;`)
 	fmt.Println(w, "Established admin_users db connection", nil)
 	if err != nil {
 		println("Admin user fetch error: ", err)
@@ -55,7 +55,7 @@ func AdminLogin(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 
 	}
 
-	if admin_name == "tk@trevorknott.io" /*names[0] */ && admin_password == "b0" /*passwords[0]*/ {
+	if admin_name == names[0] && admin_password == passwords[0] {
 		os.Setenv("admin", "true")
 		println("ADMIN LOGGED IN CORRECTLY")
 		http.Redirect(w, req, "/", 301)
@@ -65,6 +65,8 @@ func AdminLogin(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 		fmt.Fprintf(w, "ADMIN - Log In Failed")
 		os.Setenv("admin", "false")
 	}
+
+	fmt.Println("INFO: ", names[0], passwords[0])
 }
 
 func IsAdminLoggedIn() bool {
