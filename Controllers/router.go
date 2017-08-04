@@ -62,6 +62,7 @@ func InitServer() {
 	/* Will use /api/ always! */
 	mux.GET("/api/pc_langs", langCtrl.ApiLangFetch)
 	mux.GET("/api/blog_posts", blogCtrl.ApiBlogFetch)
+	mux.GET("/api/blog_posts/:post-id", blogCtrl.ApiSingleFetch)
 
 	//http.Handle("/Public/", http.StripPrefix("/Public", http.FileServer(http.Dir("./Public"))))
 

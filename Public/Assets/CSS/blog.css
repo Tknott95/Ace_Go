@@ -1,6 +1,6 @@
 
 .form-top {
-  margin-top: 500px;
+  margin-top: 50px;
 }
 
 .mdl-layout__drawer-button {
@@ -22,10 +22,6 @@ a:hover {
       max-width: 80%;
   }
 
-  tr, td {
-    height: 700px;
-  }
-
   img {
       max-height: 400px;
     }
@@ -36,7 +32,6 @@ a:hover {
 
     .mdl-card {
       width: 350px;
-      height: 700px;
     }
 
     .mdl-textfield {

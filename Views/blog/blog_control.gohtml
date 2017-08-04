@@ -4,20 +4,15 @@
 
 
 <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-  <thead>
-    <tr class="tr-tk">
-      <th class="mdl-data-table__cell--non-numeric">Delete Posts</th>
-
-      <th class="mdl-data-table__cell--non-numeric">Edit Posts</th>
-      <th class="mdl-data-table__cell--non-numeric">Blog Posts</th>
-      <th class="mdl-data-table__cell--non-numeric">Title</th>
-      <th class="mdl-data-table__cell--non-numeric">Image</th>
-      <th class="mdl-data-table__cell--non-numeric">Category</th>
-      <th class="mdl-data-table__cell--non-numeric">Content</th>
-      <th class="mdl-data-table__cell--non-numeric">Author</th>
-      <th class="mdl-data-table__cell--non-numeric">Date</th>
-    </tr>
-  </thead>
+  <th class="mdl-data-table__cell--non-numeric">Delete Posts</th>
+  <th class="mdl-data-table__cell--non-numeric">Edit Posts</th>
+  <th class="mdl-data-table__cell--non-numeric">Blog Posts</th>
+  <th class="mdl-data-table__cell--non-numeric">Title</th>
+  <th class="mdl-data-table__cell--non-numeric">Image</th>
+  <th class="mdl-data-table__cell--non-numeric">Category</th>
+  <th class="mdl-data-table__cell--non-numeric">Content</th>
+  <th class="mdl-data-table__cell--non-numeric">Author</th>
+  <th class="mdl-data-table__cell--non-numeric">Date</th>
 
   {{ range . }}
 
@@ -84,6 +79,7 @@
       </div>
       <div class="mdl-card__actions mdl-card--border">
         <a href="/api/blog_posts" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">JSON View of Posts</a>
+         <a href="/api/blog_posts/{{ .ID }}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">JSON View of SINGLE Post</a>
         <div class="mdl-layout-spacer"></div>
         <!--button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">favorite</i></button>
     <button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">share</i></button -->

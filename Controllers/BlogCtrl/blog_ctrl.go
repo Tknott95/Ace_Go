@@ -2,6 +2,7 @@ package blogCtrl
 
 import (
 	"crypto/sha1"
+	"encoding/json"
 	"fmt"
 	"io"
 	"log"
@@ -220,4 +221,37 @@ func BlogUpdate(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	} else {
 		fmt.Fprintf(w, "Must be named Trevor Knott yo he is admin!")
 	}
+}
+
+func ApiSingleFetch(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+
+	println("📝 Currently on Single Fetch Blog API.")
+
+	post_to_edit := ps.ByName("post-id")
+	stmt, err := mydb.Store.DB.Prepare("SELECT * FROM blog_ctrl WHERE blog_id=? ORDER BY blog_id DESC;")
+	if err != nil {
+		println("eRROR:", err)
+	}
+	defer stmt.Close()
+
+	rows, err := stmt.Query(post_to_edit)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	posts := []*Models.BlogPost{}
+	for rows.Next() {
+		var post Models.BlogPost
+		err = rows.Scan(&post.ID, &post.Title, &post.Image, &post.Category, &post.Content, &post.Author, &post.Date)
+
+		posts = append(posts, &post)
+	}
+
+	jsonData, err := json.Marshal(posts)
+	if err != nil {
+		fmt.Println("error: ", err)
+	}
+
+	w.Write(jsonData)
 }
