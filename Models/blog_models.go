@@ -1,9 +1,5 @@
 package Models
 
-import (
-	"time"
-)
-
 type BlogPost struct {
 	ID       int
 	Title    string
@@ -20,9 +16,10 @@ type BlogPost struct {
 }
 
 type Comment struct {
+	Post_ID       int
 	ID            int
 	Author        string
 	Comment       string
-	DatePublished time.Time
-	LastUpdated   time.Time
+	DatePublished string
+	LastUpdated   string
 }
