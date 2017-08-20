@@ -60,12 +60,12 @@
   {{ end }}
 </table>
 
-<div class="container-fluid">
+<br>  <hr>
 
+{{ range . }}
 
-  {{ range . }}
-
-  <div class=" col-md-4  col-xs-6">
+<ul class="demo-list-icon mdl-list">
+  <li class="mdl-list__item" style="background-color: rgba(cyan, .4);">
 
     <div class="mdl-card mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet mdl-shadow--2dp col-sm-3" style="height: 700px;">
       <figure class="mdl-card__media">
@@ -79,7 +79,7 @@
       </div>
       <div class="mdl-card__actions mdl-card--border">
         <a href="/api/blog_posts" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">JSON View of Posts</a>
-         <a href="/api/blog_posts/{{ .ID }}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">JSON View of SINGLE Post</a>
+        <a href="/api/blog_posts/{{ .ID }}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">JSON View of SINGLE Post</a>
         <div class="mdl-layout-spacer"></div>
         <!--button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">favorite</i></button>
     <button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">share</i></button -->
@@ -94,14 +94,43 @@
           <button type="submit" formmethod="get" formaction="/blog_posts/edit/{{.ID}}">EDIT <i class="material-icons">edit</i></button>
         </form>
 
+  </li>
+</ul>
+
+
+<ul class="demo-list-icon mdl-list">
+  <li class="mdl-list__item">
+    <form action="/blog/comment/add/{{.ID}}" method="POST" enctype="multipart/form-data">
+
+      <large>Add Comment pid: {{.ID}}</large>
+
+      <div class="form-group row">
+        <label for="example-search-input" class="col-2 col-form-label">Author</label>
+        <div class="col-10">
+          <input name="author" class="input-lg form-control" type="text" value="" id="author">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="example-email-input" class="col-2 col-form-label">Comment Body</label>
+        <div class="col-10">
+          <input name="body" class="input-lg form-control" type="text" value="" id="body">
+        </div>
       </div>
 
-    </div>
-  </div>
+
+      <button type="submit" class="btn btn-block btn-primary btn-lg">Add Comment</button>
+
+    </form>
+    </span>
+  </li>
+
+</ul>
 
 
+<hr>
+<br>  
 
 
-  {{ end }}
+{{ end }}
 
-  <br><br><br><br> {{template "footer"}}
+<br><br><br><br> {{template "footer"}}

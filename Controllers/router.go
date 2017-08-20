@@ -8,6 +8,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 	adminCtrl "github.com/tknott95/Ace_Go/Controllers/AdminCtrl"
 	blogCtrl "github.com/tknott95/Ace_Go/Controllers/BlogCtrl"
+	blogCommentsCtrl "github.com/tknott95/Ace_Go/Controllers/BlogCtrl/CommentsCtrl"
 	langCtrl "github.com/tknott95/Ace_Go/Controllers/LangCtrl"
 	sGrid_Ctrl "github.com/tknott95/Ace_Go/Controllers/SgridCtrl"
 	twilioCtrl "github.com/tknott95/Ace_Go/Controllers/TwilioCtrl"
@@ -44,14 +45,16 @@ func InitServer() {
 	mux.POST("/pc_langs/add", langCtrl.LangAdd)
 	mux.POST("/pc_langs/edit/:l-id", langCtrl.LangUpdate) /* will use formval in blog portion for sure tho */
 
-	// BLOG POSTS
+	// BLOG POSTS w/ Comments
 	mux.GET("/blog_posts", blogFetch)
-	mux.GET("/blog_posts/add", blogAddPage)
+	mux.GET("/blog/add", blogAddPage)
 	mux.GET("/blog_posts/edit/:post-id", blogCtrl.SinglePostFetch)
 	mux.POST("/blog_posts/edit/:blog-id", blogCtrl.BlogUpdate)
-	mux.POST("/blog_posts/add", blogCtrl.BlogPostAdd)
+	mux.POST("/blog/add", blogCtrl.BlogPostAdd)
 	mux.POST("/blog_posts/update/:blog_id", blogCtrl.BlogUpdate)
 	mux.POST("/blog_posts/delete/:post_id/:pic_rmv", blogCtrl.BlogPostDel)
+	/* Comments */
+	mux.POST("/blog/comment/add/:pid", blogCommentsCtrl.AddComment)
 
 	// Admin Login
 	mux.GET("/admin_signin", adminCtrl.AdminPage)

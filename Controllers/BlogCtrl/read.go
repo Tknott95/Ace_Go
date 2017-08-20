@@ -48,7 +48,7 @@ func SinglePostFetch(w http.ResponseWriter, req *http.Request, ps httprouter.Par
 
 	for rows.Next() {
 		var post Models.BlogPost
-		err = rows.Scan(&post.ID, &post.Title, &post.Image, &post.Category, &post.Content, &post.Author, &post.Date, &post.Likes, &post.Dislikes, &post.Views, &post.Shares, &post.Comments)
+		err = rows.Scan(&post.ID, &post.Title, &post.Image, &post.Category, &post.Content, &post.Author, &post.Date, &post.Likes, &post.Dislikes, &post.Views, &post.Shares)
 		post.Comments = blogCommentsCtrl.FetchComments(post.ID)
 		posts = append(posts, &post)
 
