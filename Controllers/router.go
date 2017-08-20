@@ -55,6 +55,7 @@ func InitServer() {
 	mux.POST("/blog_posts/delete/:post_id/:pic_rmv", blogCtrl.BlogPostDel)
 	/* Comments */
 	mux.POST("/blog/comment/add/:pid", blogCommentsCtrl.AddComment)
+	mux.POST("/blog/comment/del/:cid", blogCommentsCtrl.DelComment)
 
 	// Admin Login
 	mux.GET("/admin_signin", adminCtrl.AdminPage)

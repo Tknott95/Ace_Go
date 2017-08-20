@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
+	"github.com/tknott95/Ace_Go/Controllers/AdminCtrl"
 	mydb "github.com/tknott95/Ace_Go/Controllers/DbCtrl"
 	Models "github.com/tknott95/Ace_Go/Models"
 )
@@ -39,15 +40,16 @@ func AddComment(w http.ResponseWriter, req *http.Request, ps httprouter.Params) 
 	// strconv.Atoi(postID)
 	author := req.FormValue("author")
 	body := req.FormValue("body")
+	redirectURL := "http://trevorknott.io/blog/" + postID
 
 	dbInsert, err := mydb.Store.DB.Prepare(`INSERT INTO blog_comments(post_id, comment_id, comment_author, comment_body) VALUES(?, ?, ?, ?);`) // `INSERT INTO customer VALUES ("James");`
 	if err != nil {
-		println("Unable to insert language into mysql db.")
+		println("Unable to insert comment into mysql db via. ", err)
 	}
 
 	result, err := dbInsert.Exec(postID, 0, author, body)
 	if err != nil {
-		println("Error adding sql lang")
+		println("Error adding(Exec) sql comment via:  ", err)
 	}
 
 	fmt.Println(w, "Comment by:", author, "/n For pid: ", postID, " RESULT:", result)
@@ -57,7 +59,39 @@ func AddComment(w http.ResponseWriter, req *http.Request, ps httprouter.Params) 
 	println("Post ID :", postID)
 	println("Comment Author ", author)
 	println("Comment Body:", body, "\n")
-	fmt.Println(w, "Comment by:", author, "/n For pid: ", postID, " RESULT:", result)
 
-	//http.Redirect(w, req, "/blog_posts", 301)
+	http.Redirect(w, req, redirectURL, 301)
+}
+
+func DelComment(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	if AdminCtrl.IsAdminLoggedIn() == true {
+		commentID := ps.ByName("cid")
+		// strconv.Atoi(postID)
+
+		redirectURL := "http://trevorknott.io/blog" //+ postID
+
+		println("Comment to delete via PID: " + " CID: " + commentID)
+
+		prep, err := mydb.Store.DB.Prepare(`DELETE FROM blog_comments WHERE comment_id= ?;`)
+		defer prep.Close()
+
+		rows, err := prep.Query(commentID)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer rows.Close()
+		for rows.Next() {
+			// ...
+		}
+		if err = rows.Err(); err != nil {
+			log.Fatal(err)
+		}
+
+		println(w, "Comment to delete via PID: "+" CID: "+commentID)
+		http.Redirect(w, req, redirectURL, 301)
+
+	} else {
+		println("Failed Comment Delete for CID: " + ps.ByName("cid"))
+		fmt.Fprintf(w, "Must be admin...")
+	}
 }
