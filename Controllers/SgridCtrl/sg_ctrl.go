@@ -13,6 +13,8 @@ import (
 )
 
 func SendEmail(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	var fromWho string
 	var subjOfMail string
 	var mailToSend string

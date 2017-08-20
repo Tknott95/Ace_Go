@@ -9,6 +9,8 @@ import (
 )
 
 func TwilioTest(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	var msgToSend string = req.FormValue("msg-to-trev")
 	var msgSenderName string = req.FormValue("msg-name")
 	var msgSenderNum string = req.FormValue("msg-num")

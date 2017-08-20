@@ -36,6 +36,8 @@ func FetchComments(post_id int) []*Models.Comment {
 }
 
 func AddComment(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	postID := ps.ByName("pid")
 	// strconv.Atoi(postID)
 	author := req.FormValue("author")
