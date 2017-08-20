@@ -29,8 +29,8 @@ func BlogPostFetch() []*Models.BlogPost {
 	posts := []*Models.BlogPost{}
 	for rows.Next() {
 		var post Models.BlogPost
-		err = rows.Scan(&post.ID, &post.Title, &post.Image, &post.Category, &post.Content, &post.Author, &post.Date)
-
+		err = rows.Scan(&post.ID, &post.Title, &post.Image, &post.Category, &post.Content, &post.Author, &post.Date, &post.Likes, &post.Dislikes, &post.Views, &post.Shares)
+		post.Comments = fetchComments(post.ID)
 		posts = append(posts, &post)
 	}
 	return posts
@@ -54,16 +54,20 @@ func SinglePostFetch(w http.ResponseWriter, req *http.Request, ps httprouter.Par
 	defer rows.Close()
 
 	posts := []*Models.BlogPost{}
+
 	for rows.Next() {
 		var post Models.BlogPost
-		err = rows.Scan(&post.ID, &post.Title, &post.Image, &post.Category, &post.Content, &post.Author, &post.Date)
-
+		err = rows.Scan(&post.ID, &post.Title, &post.Image, &post.Category, &post.Content, &post.Author, &post.Date, &post.Likes, &post.Dislikes, &post.Views, &post.Shares, &post.Comments)
+		post.Comments = fetchComments(post.ID)
 		posts = append(posts, &post)
+
 	}
 
 	globals.Tmpl.ExecuteTemplate(w, "blog_edit.gohtml", posts)
 
 }
+
+
 
 func BlogPostDel(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 	if AdminCtrl.IsAdminLoggedIn() == true {
@@ -243,8 +247,8 @@ func ApiSingleFetch(w http.ResponseWriter, req *http.Request, ps httprouter.Para
 	posts := []*Models.BlogPost{}
 	for rows.Next() {
 		var post Models.BlogPost
-		err = rows.Scan(&post.ID, &post.Title, &post.Image, &post.Category, &post.Content, &post.Author, &post.Date)
-
+		err = rows.Scan(&post.ID, &post.Title, &post.Image, &post.Category, &post.Content, &post.Author, &post.Date, &post.Likes, &post.Dislikes, &post.Views, &post.Shares)
+		post.Comments = fetchComments(post.ID)
 		posts = append(posts, &post)
 	}
 
