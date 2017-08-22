@@ -1,6 +1,7 @@
 package sGrid_Ctrl
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 
@@ -12,36 +13,26 @@ import (
 	globals "github.com/tknott95/Ace_Go/Globals"
 )
 
+type Email struct {
+	SenderEmail string `json:"mail-email"`
+	EmailSubj   string `json:"mail-subj"`
+	EmailMsg    string `json:"mail-to-trev"`
+	EmailAuthor string `json:"mail-author"`
+}
+
 func SendEmail(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
-	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-	var fromWho string
-	var subjOfMail string
-	var mailToSend string
-	var nameOfSender string
 
-	fromWho = req.FormValue("mail-from")
-	subjOfMail = req.FormValue("mail-subj")
-	mailToSend = req.FormValue("mail-to-trev")
-	nameOfSender = req.FormValue("mail-author")
+	var emailRes Email
+	decoder := json.NewDecoder(req.Body)
+	decoder.Decode(&emailRes)
 
-	if subjOfMail == "" {
-		subjOfMail = "Sent From AceAdmin via. Sendgrid"
-	}
-
-	if nameOfSender == "" {
-		nameOfSender = "Hitler(ANON)"
-	}
-
-	if fromWho == "" {
-		fromWho = "Anonymous@trevorknott.io"
-	}
-
-	from := mail.NewEmail("TK - From AceAdmin", fromWho)
-	subject := "From: " + nameOfSender + " Subj: " + subjOfMail
-	to := mail.NewEmail(fromWho+" - "+nameOfSender, "tk@trevorknott.io")
-	plainTextContent := mailToSend
-	htmlContent := "<strong>..." + mailToSend + "</strong>"
+	from := mail.NewEmail("TK - From AceAdmin", emailRes.SenderEmail)
+	subject := "From: " + emailRes.EmailAuthor + " Subj: " + emailRes.EmailSubj
+	to := mail.NewEmail(emailRes.SenderEmail+" - "+emailRes.EmailAuthor, "tk@trevorknott.io")
+	plainTextContent := emailRes.EmailMsg
+	htmlContent := "<strong>..." + emailRes.EmailMsg + "</strong>"
 	message := mail.NewSingleEmail(from, subject, to, plainTextContent, htmlContent)
 	client := sendgrid.NewSendClient(globals.SGridApi)
 	response, err := client.Send(message)
@@ -56,5 +47,10 @@ func SendEmail(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 		fmt.Println(response.Headers)
 	}
 
-	http.Redirect(w, req, "http://trevorknott.io", 301)
+	w.Header().Set("server", "Sucesfully sent to Trevor!")
+	w.WriteHeader(http.StatusInternalServerError)
+	w.Write([]byte("OK"))
+
+	w.WriteHeader(200)
+	// http.Redirect(w, req, "http://trevorknott.io", 301)
 }

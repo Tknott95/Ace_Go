@@ -22,7 +22,9 @@ func InitServer() {
 	handler := cors.Default().Handler(mux)
 
 	c := cors.New(cors.Options{
-		AllowedOrigins:   []string{"http://www.trevorknott.io", "www.trevorknott.io", "https://www.trevorknott.io"},
+		AllowedOrigins:   []string{"http://www.trevorknott.io", "http://localhost:5280"},
+		AllowedMethods:   []string{"GET", "POST", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"*"},
 		AllowCredentials: true,
 	})
 
